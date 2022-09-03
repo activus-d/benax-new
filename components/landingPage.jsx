@@ -7,9 +7,15 @@ import Footer from './footer'
 export default function LandingPage({children}) {
     const [isDomLoaded, setIsDomLoaded] = useState(false)
 
+
     useEffect(() => {
-        window.addEventListener('load', () => {setIsDomLoaded(true)})
-    })
+        const timeout = setTimeout(() => {
+            setIsDomLoaded(true)
+        }, 5000)
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [])
 
     if(!isDomLoaded) {
         return <main className='bg-veryDeepBlue h-screen w-screen flex justify-center items-center'>
