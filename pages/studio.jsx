@@ -46,8 +46,8 @@ export default function Studio() {
 
 
     return (
-        <section className='flex flex-col items-center justify-center w-full text-deepBlue bg-black'>
-            <div className="relative md:w-1/2 mx-auto">
+        <section className='flex flex-col items-center justify-center w-full text-deepBlue md:bg-black'>
+            <div className="relative md:w-1/2 mx-auto w-full">
                 {photos.map(photo => {
                     const {id, src} = photo
                     return(
@@ -59,7 +59,7 @@ export default function Studio() {
                         </div>
                     )
                 })}
-                <div className='absolute w-full top-[250px]'>
+                <div className='absolute w-full top-[250px] md-w-full'>
                 {isPrev && <button className='absolute left-7 cursor-pointer arrowLeft' onClick={handlePrev}>
                     <RiArrowLeftCircleFill className='text-veryDeepBlue text-5xl bg-white rounded-full'/>
                 </button>}

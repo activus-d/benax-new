@@ -11,7 +11,7 @@ export default function LandingPage({children}) {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setIsDomLoaded(true)
-        }, 5000)
+        }, 3000)
         return () => {
             clearTimeout(timeout)
         }
