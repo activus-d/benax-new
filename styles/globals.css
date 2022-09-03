@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -15,12 +19,65 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.show {
+  height: 170px;
+}
+
+/* CSS for topSection */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {
+    opacity: .4
   }
-  body {
-    color: white;
-    background: black;
+
+  to {
+    opacity: 1
+  }
+}
+.active {
+  background-color: #031E39;
+}
+.arrowDown {
+  animation-name: arrowDownBounce;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+@keyframes arrowDownBounce {
+  from {
+    transform: translateY(5px);
+  }
+  to {
+    transform: translateY(15px);
+  }
+}
+
+/* CSS FOR STUDIO COMPONENT */
+.arrowRight {
+  animation-name: arrowRightBounce;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+@keyframes arrowRightBounce {
+  from {
+    transform: translateX(5px);
+  }
+  to {
+    transform: translateX(15px);
+  }
+}
+.arrowLeft {
+  animation-name: arrowLeftBounce;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+}
+@keyframes arrowLeftBounce {
+  from {
+    transform: translateX(-5px);
+  }
+  to {
+    transform: translateX(-15px);
   }
 }
