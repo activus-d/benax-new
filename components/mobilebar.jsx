@@ -27,10 +27,12 @@ export default function MobileBar() {
     return(
         <nav className='md:hidden px-5'>
             <div className='flex justify-between mb-4'>
-                <img 
-                    src='/assets/logo.png'
-                    className='h-14 w-80 ml-[-40px]'
-                />
+                <Link href="/homePage">
+                    <img 
+                        src='/assets/logo.png'
+                        className='h-14 w-80 ml-[-40px]'
+                    />
+                </Link>
                 {!isMobileNavHeight ? 
                     <button onClick={handleNav}>
                         <GiHamburgerMenu className='text-5xl'/>
