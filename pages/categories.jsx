@@ -1,7 +1,7 @@
 import React from 'react'
 import {BsArrowRight} from 'react-icons/bs'
 
-export default function() {
+export default function Categories() {
     return (
         <section className='pt-2 px-5 md:px-0 md:pl-14 md:mr-14 basis-1/2 font-bold'>
             <h2 className='text-3xl mb-5 text-deepBlue'>CATEGORIES</h2>
