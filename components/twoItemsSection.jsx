@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { products } from './data'
 
-export default function() {
+export default function TwoItemsSection() {
     const [bags, setBags] = useState(products[1])
     const product1 = bags.items[0]
     const product2 = bags.items[1]

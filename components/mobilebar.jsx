@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 import { useGlobalContext } from './context'
 
-export default function() {
+export default function MobileBar() {
     const ulRef = useRef(null)
 
     const {isMobileNavHeight, mobileHeightFalse, mobileHeightTrue} = useGlobalContext()
