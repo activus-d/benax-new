@@ -1,13 +1,13 @@
 import '../styles/globals.css'
 import { AppProvider } from '../components/context'
-import LandingPage from '../components/landingPage'
+import Layout from '../components/layout'
 
 function MyApp({ Component, pageProps }) {
   return (
     <AppProvider>
-      <LandingPage>
+      <Layout>
         <Component {...pageProps} />
-      </LandingPage>
+      </Layout>
     </AppProvider>
     
   )

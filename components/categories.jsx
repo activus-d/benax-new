@@ -1,5 +1,6 @@
 import React from 'react'
 import {BsArrowRight} from 'react-icons/bs'
+import Link from 'next/link'
 
 export default function Categories() {
     return (
@@ -18,12 +19,14 @@ export default function Categories() {
                     </span>
                     <BsArrowRight />
                 </li>
-                <li className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'>
-                    <span>
-                        BAGS
-                    </span>
-                    <BsArrowRight />
-                </li>
+                <Link href='/bags'>
+                    <li className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'>
+                        <span>
+                            BAGS
+                        </span>
+                        <BsArrowRight />
+                    </li>
+                </Link>
                 <li className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'>
                     <span>
                         SHOES
