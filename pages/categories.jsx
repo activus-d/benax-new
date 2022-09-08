@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function Categories() {
     return (
-        <section className='pt-2 px-5 md:px-0 md:pl-14 md:mr-14 basis-1/2 font-bold'>
+        <section className='pt-2 px-5 md:px-0 md:pl-14 md:mr-14 basis-1/2 font-bold' id='categories'>
             <h2 className='text-3xl mb-5 text-deepBlue'>CATEGORIES</h2>
             <ul>
                 <li className='flex items-center justify-between h-14 border-t border-t-lightGrey hover:text-lightGrey cursor-pointer'>

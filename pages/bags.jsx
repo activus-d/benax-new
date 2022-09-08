@@ -11,11 +11,15 @@ const BagList = ({bags}) => {
             fallbackData: bags 
         } //third parameter. This is used to cached the data. The useSWR would send a request to the server to revalidate if there is an update in the data
     )
-    // console.log(bags)
+    console.log(data)
     return (
         <section>
-            <h1>Hello</h1>
-            <Bags bags={bags} />
+            <h2>Bags</h2>
+            <div>
+                {data.data.map(item => {
+                    console.log(item.attributes)
+                })}
+            </div>
         </section>
     )
 }

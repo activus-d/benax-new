@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-const AppContext = React.createContext();
-import { studioPhotos } from './data'
 
-const AppProvider = ({ children }) => {
+const NavContext = React.createContext();
+
+const NavProvider = ({ children }) => {
   const [isMobileNavHeight, setIsMobileNavHeight] = useState(false);
 
   const mobileHeightTrue = () => {
@@ -14,22 +14,21 @@ const AppProvider = ({ children }) => {
   
 
   return (
-    <AppContext.Provider
+    <NavContext.Provider
       value={{
         isMobileNavHeight,
         mobileHeightTrue,
         mobileHeightFalse,
-        studioPhotos
        
       }}
     >
       {children}
-    </AppContext.Provider>
+    </NavContext.Provider>
   );
 };
 // make sure use
-export const useGlobalContext = () => {
-  return useContext(AppContext);
+export const useNavContext = () => {
+  return useContext(NavContext);
 };
 
-export { AppContext, AppProvider };
+export { NavContext, NavProvider };

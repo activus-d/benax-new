@@ -7,6 +7,7 @@ import Studio from './studio'
 import BookAppointment from './bookAppointment'
 import JoinUs from './joinUs'
 
+
 const homePage = () => {
     return <>
         <TopSection />

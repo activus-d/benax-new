@@ -1,16 +1,14 @@
 import React, { useRef } from 'react'
-import Image from 'next/image'
-import logo from '../public/assets/logo.png'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {FaTimes} from 'react-icons/fa'
 import Link from 'next/link'
 
-import { useGlobalContext } from './context'
+import { useNavContext } from './navContext'
 
 export default function MobileBar() {
     const ulRef = useRef(null)
 
-    const {isMobileNavHeight, mobileHeightFalse, mobileHeightTrue} = useGlobalContext()
+    const {isMobileNavHeight, mobileHeightFalse, mobileHeightTrue} = useNavContext()
 
     const handleNav = () => {
         const element = ulRef.current

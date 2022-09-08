@@ -1,9 +1,8 @@
 import React, {useRef, useEffect, useState, Children} from 'react'
 import {BsArrowDown} from 'react-icons/bs'
-import { useGlobalContext } from './context'
+import Link from 'next/link'
 
 export default function TopSection() {
-    const { isMobileNavHeight } = useGlobalContext()
     const [slideIndex, setSlideIndex] = useState(0)
     const mySlides = useRef(null)
     const myDots = useRef(null)
@@ -78,7 +77,11 @@ export default function TopSection() {
                 <h2 className='pr-10 text-2xl font-bold'>
                     SHOP NOW
                 </h2>
-                <BsArrowDown className='text-6xl mt-7 arrowDown'/>
+                <Link href='#categories'>
+                    <a>
+                        <BsArrowDown className='text-6xl mt-7 arrowDown'/>
+                    </a>
+                </Link>
             </div>
            </div>
         </section>
