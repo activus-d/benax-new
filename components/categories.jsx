@@ -13,12 +13,14 @@ export default function Categories() {
                     </span>
                     <BsArrowRight />
                 </li>
-                <li className='flex items-center justify-between h-14 border-t border-t-lightGrey border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'>
-                    <span>
-                        CLOTHING
-                    </span>
-                    <BsArrowRight />
-                </li>
+                <Link href='/clothing'>
+                    <li className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'>
+                        <span>
+                            CLOTHING
+                        </span>
+                        <BsArrowRight />
+                    </li>
+                </Link>
                 <Link href='/bags'>
                     <li className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'>
                         <span>

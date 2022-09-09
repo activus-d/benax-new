@@ -2,12 +2,12 @@ import { fetcher } from "../lib/api"
 import useSWR from 'swr'
 import { MdOutlineFavorite } from 'react-icons/md'
 
-const BagList = ({bags}) => {
+const ClothList = ({cloths}) => {
     //useSWR helps us enable pagination of our api data
-    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/bags?populate=*`, //first parameter
+    const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/cloths?populate=*`, //first parameter
         fetcher, //second parameter
         {
-            fallbackData: bags 
+            fallbackData: cloths 
         } //third parameter. This is used to cached the data. The useSWR would send a request to the server to revalidate if there is an update in the data
     )
     // console.log(data)
@@ -22,7 +22,7 @@ const BagList = ({bags}) => {
                     const {data} = product_image
                     const {formats} = data.attributes
                     const {large, medium, small} = formats
-                    // console.log(item)
+                    console.log(item)
                     return (
                         <div key={''} className="align-self-center justify-self-center relative">
                             <img 
@@ -51,15 +51,15 @@ const BagList = ({bags}) => {
 
 //another option for rendering an API is getStaticProps. Thsi is for static site generation. In this case the data to be used for the page would be available to the user at build time ahead of the user request and data can come from an headless CMS for example
 export async function getStaticProps() {
-    const bagsResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/bags?populate=*`);
+    const clothsResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/cloths?populate=*`);
     // console.log(process.env.NEXT_PUBLIC_STRAPI_URL)
     return {
         props: {
-            bags: bagsResponse
+            cloths: clothsResponse
         }
     }
 }
 
 //another option is to use the fetch API with the useEffect in react.
 
-export default BagList
+export default ClothList

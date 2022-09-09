@@ -47,7 +47,11 @@ export default function TopSection() {
                 <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">
                     <img 
                         src="assets/image13.jpg"
-                        className="w-full h-full"
+                        className="w-full h-full hidden md:block"
+                    />
+                    <img 
+                        src="assets/mobileTry.jpg"
+                        className="w-full h-full md:hidden"
                     />
                 </div>
                 <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">

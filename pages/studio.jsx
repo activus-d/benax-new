@@ -1,10 +1,9 @@
 import React, {useState, useRef} from 'react'
 import { RiArrowLeftCircleFill } from 'react-icons/ri'
 import { RiArrowRightCircleFill } from 'react-icons/ri'
-import { useGlobalContext } from '../components/context'
+import { studioPhotos } from '../components/data'
 
 export default function Studio() {
-    const {studioPhotos} = useGlobalContext()
     const [photos, setPhotos] = useState([studioPhotos[0]])
     const [isNext, setIsNext] = useState(true)
     const [isPrev, setIsPrev] = useState(false)
