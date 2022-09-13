@@ -16,22 +16,22 @@ const ClothList = ({cloths}) => {
             <h2 className="text-center text-3xl mb-7">CLOTHING</h2>
             <div className="sm:grid sm:grid-cols-2 sm-gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
                 {data.data.map(item => {
-                    // console.log(item.attributes);
-                    const {product_name, product_image, product_price, id} = item.attributes;
+                    const {id, attributes} = item
+                    const {product_name, product_image, product_price} = attributes;
                     // console.log(product_image)
                     const {data} = product_image
                     const {formats} = data.attributes
                     const {large, medium, small} = formats
-                    console.log(item)
+                    console.log(id)
                     return (
-                        <div key={''} className="align-self-center justify-self-center relative">
+                        <div key={id} className="align-self-center justify-self-center relative">
                             <img 
                             src={'http://localhost:1337' + small.url}
                                 className='sm:h-60 sm:w-60 md:h-80 md:w-80'
                             />
                             <p>{product_name}</p>
                             <p>{`$${product_price}`}</p>
-                            <button className="absolute top-5 right-5 text-cyan-500">
+                            <button className="absolute top-5 right-5 text-fav">
                                 <MdOutlineFavorite className="text-2xl"/>
                             </button>
                         </div>

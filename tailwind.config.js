@@ -20,6 +20,7 @@ module.exports = {
         "veryLightGrey": "#e2e4e3",
         "deepBlue": "#031F3C",
         "veryDeepBlue": "#031E39",
+        "fav": "#2C474B"
       },
       backgroundSize: {
         "100%": "100% 100%",
@@ -33,6 +34,9 @@ module.exports = {
       },
       animation: {
         scale: 'scale 1s ease-in-out infinite',
+      },
+      fontFamily: {
+        'logo': ["'Bellota', cursive"]
       },
     },
   },

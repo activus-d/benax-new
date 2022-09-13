@@ -1,45 +1,51 @@
-import React, { useRef } from 'react'
-import {GiHamburgerMenu} from 'react-icons/gi'
-import {FaTimes} from 'react-icons/fa'
+import React, { useRef, useState } from 'react'
+import {IoIosMenu} from 'react-icons/io'
+import {IoIosClose} from 'react-icons/io'
+import { BsCart } from 'react-icons/bs'
 import Link from 'next/link'
-
-import { useNavContext } from './navContext'
+import { useGlobalContext } from '../globalContext'
 
 export default function MobileBar() {
+    const [isMobileNavHeight, setIsMobileNavHeight] = useState(false);
     const ulRef = useRef(null)
+    const { cartItemsNo } = useGlobalContext()
 
-    const {isMobileNavHeight, mobileHeightFalse, mobileHeightTrue} = useNavContext()
+    // const {isMobileNavHeight, mobileHeightFalse, mobileHeightTrue} = useNavContext()
 
     const handleNav = () => {
         const element = ulRef.current
         // element.classList.contains('show') ?  element.classList.remove('show') :  element.classList.add('show')
         if(!element.classList.contains('show')) {
-            mobileHeightTrue()
+            setIsMobileNavHeight(true)
             element.classList.add('show')
         }else {
-            mobileHeightFalse()
+            setIsMobileNavHeight(false)
             element.classList.remove('show')
         }
     }
 
     return(
-        <nav className='md:hidden px-5'>
-            <div className='flex justify-between mb-4'>
-                <Link href="/homePage">
-                    <img 
-                        src='/assets/logo.png'
-                        className='h-14 w-80 ml-[-40px]'
-                    />
+        <nav className='md:hidden px-5 text-deepBlue'>
+            <div className='flex justify-between items-center mb-4'>
+                <Link href="/">
+                    <span className='font-logo'>BENAX COLLECTION</span>
                 </Link>
+                <div className=' relative flex justify-center items-center'>
+                    <Link href='/cart'>
+                        <a className='flex justify-center items-center'>
+                            <BsCart className='text-[28px]' />
+                            <span className='absolute top-[0px] text-red-500 font-bold'>{cartItemsNo}</span>
+                        </a>
+                    </Link>
+                </div>
                 {!isMobileNavHeight ? 
                     <button onClick={handleNav}>
-                        <GiHamburgerMenu className='text-5xl'/>
+                        <IoIosMenu className='text-5xl'/>
                     </button> :
                     <button onClick={handleNav}>
-                        <FaTimes className='text-5xl'/>
+                        <IoIosClose className='text-5xl'/>
                     </button>
                 }
-                 
             </div>
             <ul className={`text-[lightGrey] h-0 overflow-hidden duration-300 ease-linear`} ref={ulRef}>
                 <li className='h-10 flex items-center px-5 '>

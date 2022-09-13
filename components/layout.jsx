@@ -3,7 +3,7 @@ import Head from 'next/head'
 import MobileBar from './navs/mobilebar'
 import TopNav from './navs/topNav'
 import Footer from './footer'
-import { NavProvider } from './navs/navContext'
+
 export default function Layout({children}) {
     const [isDomLoaded, setIsDomLoaded] = useState(false)
 
@@ -32,10 +32,8 @@ export default function Layout({children}) {
                     <link rel="icon" href="/assets/mainIcon.png" />
                 </Head>
                 <header>
-                    <NavProvider>
-                        <MobileBar />
-                        <TopNav />
-                    </NavProvider>
+                    <MobileBar />
+                    <TopNav />
                 </header>
                 <main>
                     {children}
