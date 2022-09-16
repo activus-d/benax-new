@@ -5,7 +5,8 @@ const GlobalContext = React.createContext();
 const GlobalProvider = ({ children }) => {
     //STATE AND FUNCTIONS FOR MANAGING CART ITEMS
     const [cartItemsNo, setCartItemsNo] = useState(0);
-    const [cartItems, setCartItems] = useState([]);
+    const [cartBagItems, setBagCartItems] = useState([]);
+    const [cartClothItems, setClothCartItems] = useState([]);
     const addCartItem = () => {
         setCartItemsNo(cartItemsNo + 1)
     };
@@ -13,10 +14,18 @@ const GlobalProvider = ({ children }) => {
         setCartItemsNo(cartItemsNo - 1)
     };
     const addToCart = (item) => {
-        cartItems.every(cartItem => cartItem.id !== item.id) && (
-            setCartItems([...cartItems, item]),
+        if(item.category === 'bag') {
+          if(cartBagItems.every(cartItem => cartItem.id !== item.id)) {
+            setBagCartItems([...cartBagItems, item]);
             setCartItemsNo(cartItemsNo + 1)
-        )
+          }
+        }
+        if(item.category === 'cloth') {
+          if(cartClothItems.every(cartItem => cartItem.id !== item.id)) {
+            setClothCartItems([...cartClothItems, item]);
+            setCartItemsNo(cartItemsNo + 1)
+          }
+        }
     };
  
   
@@ -28,7 +37,8 @@ const GlobalProvider = ({ children }) => {
         addCartItem,
         removeCartItem,
         addToCart,
-        cartItems
+        cartBagItems,
+        cartClothItems
       }}
     >
       {children}

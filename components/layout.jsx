@@ -11,7 +11,7 @@ export default function Layout({children}) {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setIsDomLoaded(true)
-        }, 3000)
+        }, 2000)
         return () => {
             clearTimeout(timeout)
         }

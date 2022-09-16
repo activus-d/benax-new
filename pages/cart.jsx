@@ -1,60 +1,186 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react';
+import { icons } from 'react-icons';
 import { useGlobalContext } from "../components/globalContext";
-// import { fetcher } from "../lib/api";
+import { bagsData } from './bags';
+import { clothsData } from './clothing';
+import { AiOutlineMinus } from 'react-icons/ai';
+import { AiOutlinePlus } from 'react-icons/ai';
 
 const Cart = ({cloths}) => {
-    const {cartItems} = useGlobalContext()
-    const [items, setItems] = useState([])
-    const collection = []
-    // console.log(cartItems)
-    // console.log(cloths)
-    // const fetchData = () => {
-    //     cartItems.forEach((item) => {
-    //         const {id, category} = item
-    //         fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/${category}s/${id}?populate=*`)
-    //             .then(res => res.json())
-    //             .then(data => collection.push(data))
-    //         // setItems([...items, data])
-    //         console.log(collection)
-    //     })
-    // }
+    const { cartBagItems, cartClothItems, removeCartItem } = useGlobalContext();
+    const [items, setItems] = useState([]);
+    const [totalCost, setTotalCost] = useState(0)
+    const [itemWidth, setItemWidth] = useState(0)
+    const conElement = useRef(null)
     
+    useEffect(() => {
+        let filteredBags = [];
+        let filteredCloths = [];
+        if(bagsData) {
+            filteredBags = bagsData.data.filter((bag => {
+                let item = '';
+                cartBagItems.forEach(cartItem => {
+                    if(cartItem.id === bag.id) item = cartItem.id
+                });
+                // console.log(item)
+                return bag.id === item;
+            }));
+        };
 
-    const fetchData = async () => {
-        const response =  await Promise.all(cartItems.map(item => {
-            const {id, category} = item
-            fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/${category}s/${id}?populate=*`)
-                .then(res => res.json())
-                .then(data => data)
-        }))
-         
-            
-            
-        // setItems([...items, data])
-        console.log(response)
-    }
+        if(clothsData) {
+            filteredCloths = clothsData.data.filter((cloth => {
+                let item = '';
+                cartClothItems.forEach(cartItem => {
+                    if(cartItem.id === cloth.id) item = cartItem.id
+                });
+                // console.log(item)
+                return cloth.id === item;
+            }))
+        };
+
+        filteredBags = filteredBags.map(bag => {
+            return {...bag, quantity: 1};
+        });
+
+        filteredCloths = filteredCloths.map(cloth => {
+            return {...cloth, quantity: 1};
+        });
+        // console.log(filteredBags)
+        setItems([...items, ...filteredBags, ...filteredCloths]);
+    }, []);
 
     useEffect(() => {
-        fetchData()
-        
-        // console.log(items)
-    }, [])
+        const total = items.map(item => item.attributes.product_price)
+                    .reduce((prevCost, acc) => +prevCost + acc, 0);
+        setTotalCost(+total.toFixed(2));
+        const width = conElement.current.offsetWidth
+        console.log(width)
+        setItemWidth(width)
+    }, [items])
 
     // useEffect(() => {
-    //     const interval = setInterval(() => {
+    //     const interval = setTimeout(() => {
     //         console.log(items)
-    //     }, 2000)
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
+    //     }, 3000)
     // })
+
+    const addQuantity = (slug, quantity, product_price, category) => {
+        const newItems = items.map(item => {
+            let originalPrice; 
+            if(item.attributes.slug !== slug) {
+                return item;
+            }else {
+                if(category === 'bag') {
+                    bagsData.data.forEach(bag => {
+                        return bag.attributes.slug === slug ? originalPrice = bag.attributes.product_price : '' ;
+                    });
+                };
+
+                if(category === 'cloth') {
+                    clothsData.data.forEach(cloth => {
+                        return cloth.attributes.slug === slug ? originalPrice = cloth.attributes.product_price : '' ;
+                    });
+                };
+                // console.log(originalPrice, product_price)
+                return {...item, quantity: quantity + 1, attributes: {...item.attributes, product_price: (+product_price + originalPrice).toFixed(2)}};
+            }
+        })
+        // console.log(newItems)
+        setItems(newItems);
+    };
     
+    const deductQuantity = (slug, quantity, product_price, category) => {
+        let originalPrice; 
+        let newQuantity;
+        if(quantity > 1) {
+            const newItems = items.map(item => {
+                if(item.attributes.slug !== slug) {
+                    return item;
+                }else {
+                    if(category === 'bag') {
+                        bagsData.data.forEach(bag => {
+                            return bag.attributes.slug === slug ? originalPrice = bag.attributes.   product_price : '' ;
+                        });
+                    };
+
+                    if(category === 'cloth') {
+                        clothsData.data.forEach(cloth => {
+                            return cloth.attributes.slug === slug ? originalPrice = cloth.attributes. product_price : '' ;
+                        });
+                    };
+
+                    newQuantity = (quantity > 1 ? quantity - 1 : 1 );
+                    return {...item, quantity: newQuantity, attributes: {...item.attributes, product_price: (product_price - originalPrice).toFixed(2)}};
+                }
+            })
+            setItems(newItems);
+        };
+    };
+
+    const removeItem = (slug) => {
+        const newItems = items.filter(item => item.attributes.slug !== slug);
+        setItems(newItems);
+        removeCartItem()
+    };
     
     return (
-        <section>
-            {/* {items.map(item => {
-                return <div>{item.data.attributes.product_name}</div>
-            })} */}
+        <section className='text-deepBlue mx-5 md:mx-20 lg:mx-28 flex flex-col items-center relative' ref={conElement}>
+            <h2 className='font-bold py-2 mb-4 border-b-2 border-lightGrey'>SHOPPING BAG {`(${items.length})`}</h2>
+            {items.map((item) => {
+                const {attributes, id, quantity} = item
+                // console.log(attributes, items)
+                const {product_name, product_image, product_price, slug, category} = attributes;
+                const {data} = product_image
+                const {formats} = data.attributes
+                const {large, medium, small} = formats
+                return (
+                    <div key={slug} className='grid grid-cols-2 justify-between mb-7 bg-veryLightGrey w-full'>
+                        <img 
+                            src={'http://localhost:1337' + small.url}
+                            className='h-52 w-52'
+                        />
+                        <div className='flex flex-col gap-y-2 self-center justify-self-end mx-5'>
+                            <h3>{product_name}</h3>
+                            <div className='flex w-32 h-7 bg-white grid grid-cols-3'>
+                                <button 
+                                    onClick={() => deductQuantity(slug, quantity, product_price, category)}
+                                    className='text-white bg-deepBlue flex justify-center items-center text-2xl'
+                                >
+                                    <AiOutlineMinus />
+                                </button>
+                                <p className='text-center font-bold'>{quantity}</p>
+                                <button 
+                                    onClick={() => addQuantity(slug, quantity, product_price, category)}
+                                    className='text-white bg-deepBlue flex justify-center items-center text-2xl'
+                                >
+                                    <AiOutlinePlus />
+                                </button>
+                            </div>
+                            <h3>{`$${product_price}`}</h3>
+                            <button
+                                onClick={() => removeItem(slug)}
+                                className='w-32 h-7 bg-deepBlue text-white'
+                            >
+                                REMOVE
+                            </button>
+                        </div>
+                    </div>
+                )
+            })}
+            <div className='mb-4 flex flex-col justify-center items-between w-full font-bold'>
+                <div className='flex justify-between my-3 px-5 border-2 py-2'>
+                    <p>Subtotal: </p>
+                    <p>{`$${totalCost}`}</p>
+                </div>
+                <div className='flex justify-between mb-3 px-5 border-2 py-2'>
+                    <p>Shipping: </p>
+                    <p>$0:00</p>
+                </div>
+                <div className='flex justify-between mb-3 px-5 border-2 py-2'>
+                    <p>Total Cost: </p>
+                    <p>{`$${totalCost}`}</p>
+                </div>
+            </div>
         </section>
     )
 }

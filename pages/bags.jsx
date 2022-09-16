@@ -3,6 +3,8 @@ import useSWR from 'swr'
 import { MdOutlineFavorite } from 'react-icons/md'
 import { useGlobalContext } from "../components/globalContext"
 
+export let bagsData;
+
 const BagList = ({bags}) => {
     //useSWR helps us enable pagination of our api data
     const { data } = useSWR(`${process.env.NEXT_PUBLIC_STRAPI_URL}/bags?populate=*`, //first parameter
@@ -12,7 +14,9 @@ const BagList = ({bags}) => {
         } //third parameter. This is used to cached the data. The useSWR would send a request to the server to revalidate if there is an update in the data
     )
 
-    const { addCartItem, removeCartItem, addToCart, cartItems, cartItemsNo } = useGlobalContext()
+    bagsData = data
+
+    const { addCartItem, removeCartItem, addToCart, cartBagItems, cartItemsNo } = useGlobalContext()
     // console.log(cartItemsNo)
     const handleAddToCart = (id, category) => {
         // addCartItem();

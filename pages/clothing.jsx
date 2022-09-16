@@ -1,6 +1,9 @@
 import { fetcher } from "../lib/api"
 import useSWR from 'swr'
 import { MdOutlineFavorite } from 'react-icons/md'
+import { useGlobalContext } from "../components/globalContext"
+
+export let clothsData;
 
 const ClothList = ({cloths}) => {
     //useSWR helps us enable pagination of our api data
@@ -10,14 +13,24 @@ const ClothList = ({cloths}) => {
             fallbackData: cloths 
         } //third parameter. This is used to cached the data. The useSWR would send a request to the server to revalidate if there is an update in the data
     )
+    clothsData = data
     // console.log(data)
+
+    const { addCartItem, removeCartItem, addToCart, cartClothItems, cartItemsNo } = useGlobalContext()
+    // console.log(cartItemsNo)
+    const handleAddToCart = (id, category) => {
+        // addCartItem();
+        const item = {id, category}
+        addToCart(item)
+    }
+
     return (
         <section className="text-deepBlue mb-7 px-5 md:px-14">
             <h2 className="text-center text-3xl mb-7">CLOTHING</h2>
             <div className="sm:grid sm:grid-cols-2 sm-gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
                 {data.data.map(item => {
                     const {id, attributes} = item
-                    const {product_name, product_image, product_price} = attributes;
+                    const {product_name, product_image, product_price, slug, category} = attributes;
                     // console.log(product_image)
                     const {data} = product_image
                     const {formats} = data.attributes
@@ -31,6 +44,12 @@ const ClothList = ({cloths}) => {
                             />
                             <p>{product_name}</p>
                             <p>{`$${product_price}`}</p>
+                            <button 
+                                className='bg-deepBlue text-white px-4 py-1 hover:scale-110'
+                                onClick={() => handleAddToCart(id, category)}
+                            >
+                                Add to Cart
+                            </button>
                             <button className="absolute top-5 right-5 text-fav">
                                 <MdOutlineFavorite className="text-2xl"/>
                             </button>
