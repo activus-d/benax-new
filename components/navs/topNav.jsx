@@ -46,8 +46,8 @@ export default function TopNav() {
                 <li className=' relative '>
                     <Link href='/cart'>
                         <a className='flex justify-center items-center'>
-                            <BsCart className='text-[28px]' />
-                            <span className='absolute top-[3px] text-red-500 font-bold'>{cartItemsNo}</span>
+                            <BsCart className='text-[32px]' />
+                            <span className='absolute top-[5px] text-red-500 font-bold'>{cartItemsNo}</span>
                         </a>
                     </Link>
                 </li>

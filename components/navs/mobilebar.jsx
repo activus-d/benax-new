@@ -30,11 +30,11 @@ export default function MobileBar() {
                 <Link href="/">
                     <span className='font-logo'>BENAX COLLECTION</span>
                 </Link>
-                <div className=' relative flex justify-center items-center'>
+                <div className=' relative flex justify-center items-center px-3'>
                     <Link href='/cart'>
                         <a className='flex justify-center items-center'>
-                            <BsCart className='text-[28px]' />
-                            <span className='absolute top-[0px] text-red-500 font-bold'>{cartItemsNo}</span>
+                            <BsCart className='text-[32px]' />
+                            <span className='absolute top-[1px] text-red-500 font-bold'>{cartItemsNo}</span>
                         </a>
                     </Link>
                 </div>

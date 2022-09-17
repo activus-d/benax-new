@@ -17,28 +17,24 @@ const BagList = ({bags}) => {
     bagsData = data
 
     const { addCartItem, removeCartItem, addToCart, cartBagItems, cartItemsNo } = useGlobalContext()
-    // console.log(cartItemsNo)
-    const handleAddToCart = (id, category) => {
+    const handleAddToCart = (category, id, slug) => {
         // addCartItem();
-        const item = {id, category}
+        const item = {category, id, slug}
         addToCart(item)
-        console.log(cartItemsNo)
     }
 
     return (
         <section className="text-deepBlue mb-7 px-5 md:px-14" style={{zIndex: '0'}}>
             <h2 className="text-center text-3xl mb-7">BAGS</h2>
-            <div className="sm:grid sm:grid-cols-2 sm-gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
+            <div className="sm:grid sm:grid-cols-2 sm:gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
                 {data.data.map(item => {
                     const {id, attributes} = item
                     const {product_name, product_image, product_price, slug, category} = attributes;
-                    // console.log(product_image)
                     const {data} = product_image
                     const {formats} = data.attributes
                     const {large, medium, small} = formats
-                    // console.log(item)
                     return (
-                        <div key={id} className="align-self-center justify-self-center relative">
+                        <div key={id} className="align-self-center justify-self-center relative mb-7 sm:mb-0">
                             <img 
                             src={'http://localhost:1337' + small.url}
                                 className='sm:h-60 sm:w-60 md:h-80 md:w-80'
@@ -47,7 +43,7 @@ const BagList = ({bags}) => {
                             <p>{`$${product_price}`}</p>
                             <button 
                                 className='bg-deepBlue text-white px-4 py-1 hover:scale-110'
-                                onClick={() => handleAddToCart(id, category)}
+                                onClick={() => handleAddToCart(category, id, slug)}
                             >
                                 Add to Cart
                             </button>
@@ -71,7 +67,6 @@ const BagList = ({bags}) => {
 //another option for rendering an API is getStaticProps. Thsi is for static site generation. In this case the data to be used for the page would be available to the user at build time ahead of the user request and data can come from an headless CMS for example
 export async function getStaticProps() {
     const bagsResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/bags?populate=*`);
-    // console.log(process.env.NEXT_PUBLIC_STRAPI_URL)
     return {
         props: {
             bags: bagsResponse

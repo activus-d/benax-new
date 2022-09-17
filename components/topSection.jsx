@@ -74,11 +74,11 @@ export default function TopSection() {
                 <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div>
             </div>
            <div className='absolute top-[150px]'>
-             <h1 className='text-4xl mb-5 font-bold md:text-5xl'>
+             <h1 className='text-2xl mb-5 font-bold md:text-5xl sm:text-4xl'>
                 STUDIO COLLECTION
             </h1>
             <div className='flex flex-col items-center'>
-                <h2 className='pr-10 text-2xl font-bold'>
+                <h2 className='pr-10 text-xl font-bold sm:text-2xl'>
                     SHOP NOW
                 </h2>
                 <Link href='#categories'>

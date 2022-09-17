@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { icons } from 'react-icons';
 import { useGlobalContext } from "../components/globalContext";
 import { bagsData } from './bags';
 import { clothsData } from './clothing';
 import { AiOutlineMinus } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
+import script from 'next/script'
 
 const Cart = ({cloths}) => {
     const { cartBagItems, cartClothItems, removeCartItem } = useGlobalContext();
     const [items, setItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0)
-    const [itemWidth, setItemWidth] = useState(0)
-    const conElement = useRef(null)
     
     useEffect(() => {
         let filteredBags = [];
@@ -22,7 +21,6 @@ const Cart = ({cloths}) => {
                 cartBagItems.forEach(cartItem => {
                     if(cartItem.id === bag.id) item = cartItem.id
                 });
-                // console.log(item)
                 return bag.id === item;
             }));
         };
@@ -33,7 +31,6 @@ const Cart = ({cloths}) => {
                 cartClothItems.forEach(cartItem => {
                     if(cartItem.id === cloth.id) item = cartItem.id
                 });
-                // console.log(item)
                 return cloth.id === item;
             }))
         };
@@ -45,17 +42,13 @@ const Cart = ({cloths}) => {
         filteredCloths = filteredCloths.map(cloth => {
             return {...cloth, quantity: 1};
         });
-        // console.log(filteredBags)
         setItems([...items, ...filteredBags, ...filteredCloths]);
     }, []);
 
     useEffect(() => {
         const total = items.map(item => item.attributes.product_price)
-                    .reduce((prevCost, acc) => +prevCost + acc, 0);
+                    .reduce((prevCost, acc) => +prevCost + +acc, 0);
         setTotalCost(+total.toFixed(2));
-        const width = conElement.current.offsetWidth
-        console.log(width)
-        setItemWidth(width)
     }, [items])
 
     // useEffect(() => {
@@ -81,11 +74,9 @@ const Cart = ({cloths}) => {
                         return cloth.attributes.slug === slug ? originalPrice = cloth.attributes.product_price : '' ;
                     });
                 };
-                // console.log(originalPrice, product_price)
                 return {...item, quantity: quantity + 1, attributes: {...item.attributes, product_price: (+product_price + originalPrice).toFixed(2)}};
             }
         })
-        // console.log(newItems)
         setItems(newItems);
     };
     
@@ -117,18 +108,19 @@ const Cart = ({cloths}) => {
         };
     };
 
-    const removeItem = (slug) => {
+    const removeItem = (category, id, slug) => {
         const newItems = items.filter(item => item.attributes.slug !== slug);
         setItems(newItems);
-        removeCartItem()
+        removeCartItem(category, id, slug)
     };
     
     return (
-        <section className='text-deepBlue mx-5 md:mx-20 lg:mx-28 flex flex-col items-center relative' ref={conElement}>
+        <>
+        <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script>
+        <section className='text-deepBlue mx-5 md:mx-20 lg:mx-28 flex flex-col items-center relative'>
             <h2 className='font-bold py-2 mb-4 border-b-2 border-lightGrey'>SHOPPING BAG {`(${items.length})`}</h2>
             {items.map((item) => {
                 const {attributes, id, quantity} = item
-                // console.log(attributes, items)
                 const {product_name, product_image, product_price, slug, category} = attributes;
                 const {data} = product_image
                 const {formats} = data.attributes
@@ -139,7 +131,7 @@ const Cart = ({cloths}) => {
                             src={'http://localhost:1337' + small.url}
                             className='h-52 w-52'
                         />
-                        <div className='flex flex-col gap-y-2 self-center justify-self-end mx-5'>
+                        <div className='flex flex-col gap-y-2 self-center justify-self-end mx-5 max-w-[135px]'>
                             <h3>{product_name}</h3>
                             <div className='flex w-32 h-7 bg-white grid grid-cols-3'>
                                 <button 
@@ -158,7 +150,7 @@ const Cart = ({cloths}) => {
                             </div>
                             <h3>{`$${product_price}`}</h3>
                             <button
-                                onClick={() => removeItem(slug)}
+                                onClick={() => removeItem(category, id, slug)}
                                 className='w-32 h-7 bg-deepBlue text-white'
                             >
                                 REMOVE
@@ -181,7 +173,9 @@ const Cart = ({cloths}) => {
                     <p>{`$${totalCost}`}</p>
                 </div>
             </div>
+            <button class="" type="button" className="SS_ProductCheckout css style" data-id="1" data-url="http://localhost:1337"> BuyNow </button>
         </section>
+        </>
     )
 }
 

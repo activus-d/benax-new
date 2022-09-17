@@ -15,7 +15,7 @@ export default function NewProduct() {
     // console.log(products.jackets)
     return (
         <section className='px-5 w-full md:px-14 text-deepBlue py-5'>
-            <h2 className='py-5 text-4xl'>NEW PRODUCTS</h2>
+            <h2 className='py-5 text-2xl sm:text-4xl'>NEW PRODUCTS</h2>
             <div className='grid gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-12'>
                 <div className='h-[400px] lg:col-span-6 border' key={product1.id} data-category="jackets">
                     <img 

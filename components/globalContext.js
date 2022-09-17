@@ -10,8 +10,18 @@ const GlobalProvider = ({ children }) => {
     const addCartItem = () => {
         setCartItemsNo(cartItemsNo + 1)
     };
-    const removeCartItem = () => {
-        setCartItemsNo(cartItemsNo - 1)
+    const removeCartItem = (category, id, slug) => {
+      let newBagItems;
+      let newClothItems;
+      if(category === 'bag') {
+        newBagItems = cartBagItems.filter(cartItem => cartItem.id !== id)
+        setBagCartItems(newBagItems)
+      }
+      if(category === 'cloth') {
+        newClothItems = cartClothItems.filter(cartItem => cartItem.id !== id)
+        setClothCartItems(newClothItems)
+      }
+      setCartItemsNo(cartItemsNo - 1)
     };
     const addToCart = (item) => {
         if(item.category === 'bag') {

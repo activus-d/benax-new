@@ -20,8 +20,8 @@ export default function Studio() {
         if(id == 2) {
             setIsPrev(false)
         }
-        
     };
+
     const handleNext = () => {
         const id = mySlides.current.dataset.id
         console.log(id + 'n')
@@ -42,11 +42,9 @@ export default function Studio() {
         }
     };
 
-
-
     return (
         <section className='flex flex-col text-deepBlue md:w-1/2'>
-            <h2 className='text-3xl mb-5 ml-5 md:ml-0'>STUDIO</h2>
+            <h2 className='text-2xl mb-5 ml-5 sm:text:4xl md:ml-0'>STUDIO</h2>
             <div className="relative w-full">
                 {photos.map(photo => {
                     const {id, src} = photo

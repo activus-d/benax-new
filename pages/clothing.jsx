@@ -14,30 +14,26 @@ const ClothList = ({cloths}) => {
         } //third parameter. This is used to cached the data. The useSWR would send a request to the server to revalidate if there is an update in the data
     )
     clothsData = data
-    // console.log(data)
 
     const { addCartItem, removeCartItem, addToCart, cartClothItems, cartItemsNo } = useGlobalContext()
-    // console.log(cartItemsNo)
-    const handleAddToCart = (id, category) => {
+    const handleAddToCart = (category, id, slug) => {
         // addCartItem();
-        const item = {id, category}
+        const item = {category, id, slug}
         addToCart(item)
     }
 
     return (
         <section className="text-deepBlue mb-7 px-5 md:px-14">
             <h2 className="text-center text-3xl mb-7">CLOTHING</h2>
-            <div className="sm:grid sm:grid-cols-2 sm-gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
+            <div className="sm:grid sm:grid-cols-2 sm:gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
                 {data.data.map(item => {
                     const {id, attributes} = item
                     const {product_name, product_image, product_price, slug, category} = attributes;
-                    // console.log(product_image)
                     const {data} = product_image
                     const {formats} = data.attributes
                     const {large, medium, small} = formats
-                    console.log(id)
                     return (
-                        <div key={id} className="align-self-center justify-self-center relative">
+                        <div key={id} className="align-self-center justify-self-center relative mb-7 sm:mb-0">
                             <img 
                             src={'http://localhost:1337' + small.url}
                                 className='sm:h-60 sm:w-60 md:h-80 md:w-80'
@@ -46,7 +42,7 @@ const ClothList = ({cloths}) => {
                             <p>{`$${product_price}`}</p>
                             <button 
                                 className='bg-deepBlue text-white px-4 py-1 hover:scale-110'
-                                onClick={() => handleAddToCart(id, category)}
+                                onClick={() => handleAddToCart(category, id, slug)}
                             >
                                 Add to Cart
                             </button>
@@ -71,7 +67,6 @@ const ClothList = ({cloths}) => {
 //another option for rendering an API is getStaticProps. Thsi is for static site generation. In this case the data to be used for the page would be available to the user at build time ahead of the user request and data can come from an headless CMS for example
 export async function getStaticProps() {
     const clothsResponse = await fetcher(`${process.env.NEXT_PUBLIC_STRAPI_URL}/cloths?populate=*`);
-    // console.log(process.env.NEXT_PUBLIC_STRAPI_URL)
     return {
         props: {
             cloths: clothsResponse
