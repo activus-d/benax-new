@@ -4,13 +4,13 @@ import {IoIosClose} from 'react-icons/io'
 import { BsCart } from 'react-icons/bs'
 import Link from 'next/link'
 import { useGlobalContext } from '../globalContext'
+import { useAuthContext } from '../../lib/authContext'
 
 export default function MobileBar() {
     const [isMobileNavHeight, setIsMobileNavHeight] = useState(false);
     const ulRef = useRef(null)
-    const { cartItemsNo } = useGlobalContext()
-
-    // const {isMobileNavHeight, mobileHeightFalse, mobileHeightTrue} = useNavContext()
+    const { cartItemsNo, user } = useGlobalContext()
+    const { state } = useAuthContext()
 
     const handleNav = () => {
         const element = ulRef.current
@@ -22,6 +22,10 @@ export default function MobileBar() {
             setIsMobileNavHeight(false)
             element.classList.remove('show')
         }
+        // const try1 = true
+        // !try1 && 
+        console.log(state)
+        
     }
 
     return(
@@ -65,14 +69,25 @@ export default function MobileBar() {
                 <li className='h-10 flex items-center px-5 '>
                     <Link href='bookAppointment'>
                         <span className='hover:border-b-2 hover:border-black hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
-                            BOOK AN APPOINTMENT
+                            BOOKING
                         </span>
                     </Link>
                 </li>
                 <li className='h-10 flex items-center px-5'>
                     <span className='hover:border-b-2 hover:border-black hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
-                        STUDIO
+                        ABOUT
                     </span>
+                </li>
+                <li className='h-10 flex items-center px-5'>
+                    {user ? (
+                        <Link href='/account'>
+                            <a>{user}</a>
+                        </Link>
+                    ) : (
+                        <Link href='/login'>
+                            <a>LOGIN</a>
+                        </Link>
+                    )}
                 </li>
             </ul>
         </nav>

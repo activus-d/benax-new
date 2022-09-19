@@ -6,12 +6,11 @@ import Footer from './footer'
 
 export default function Layout({children}) {
     const [isDomLoaded, setIsDomLoaded] = useState(false)
-
-
+    
     useEffect(() => {
         const timeout = setTimeout(() => {
             setIsDomLoaded(true)
-        }, 2000)
+        }, 1000)
         return () => {
             clearTimeout(timeout)
         }

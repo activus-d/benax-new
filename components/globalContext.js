@@ -107,10 +107,10 @@ const GlobalProvider = ({ children }) => {
     /**
      * We have to call magic within a useEffect hook
      */
-    useEffect(() => {
-      magic = new Magic(MAGIC_PUBLIC_KEY)
-      checkUserLoggedIn()
-    }, [])
+    // useEffect(() => {
+    //   magic = new Magic(MAGIC_PUBLIC_KEY)
+    //   checkUserLoggedIn()
+    // }, [])
  
   
 

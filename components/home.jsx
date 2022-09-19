@@ -6,9 +6,21 @@ import TwoItemsSection from './twoItemsSection'
 import Studio from './studio'
 import BookAppointment from './bookAppointment'
 import JoinUs from './joinUs'
+import Cookies from 'js-cookie'
+import { useAuthContext } from '../lib/authContext'
 
 
-const homePage = () => {
+const HomePage = () => {
+    const { isLoggedinToTrue } = useAuthContext()
+
+    /**
+     * check if user cookies is present
+     * if user cookies is present then set isLoggedin to true
+     */
+    if(Cookies.get('username')) {
+        isLoggedinToTrue()
+    }
+
     return <>
         <TopSection />
         <NewProduct />
@@ -24,4 +36,4 @@ const homePage = () => {
     </>
 }
 
-export default homePage
+export default HomePage

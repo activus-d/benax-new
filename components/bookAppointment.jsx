@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function BookAppointment() {
     return (
-        <section className='bg-veryLightGrey text-deepBlue h-[500px] flex flex-col items-center justify-center md:mt-14 md:w-1/2'>
+        <section className='bg-veryLightGrey text-deepBlue h-[500px] flex flex-col items-center justify-center md:mt-[52px] md:w-1/2'>
             <div>
                 <h3 className='text-xl mb-5 font-bold'>
                     BOOK A PRIVATE APPOINTMENT
