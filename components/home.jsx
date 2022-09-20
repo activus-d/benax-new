@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Categories from './categories'
 import TopSection from './topSection'
 import NewProduct from './newProducts'
@@ -6,20 +6,32 @@ import TwoItemsSection from './twoItemsSection'
 import Studio from './studio'
 import BookAppointment from './bookAppointment'
 import JoinUs from './joinUs'
-import Cookies from 'js-cookie'
-import { useAuthContext } from '../lib/authContext'
 
+import { useAuthContext } from '../lib/authContext'
+import { getUserFromLocalCookie } from '../lib/auth'
 
 const HomePage = () => {
-    const { isLoggedinToTrue } = useAuthContext()
+    const { isUserLoggedinToTrue, checkUserLoggedIn } = useAuthContext()
+
 
     /**
      * check if user cookies is present
      * if user cookies is present then set isLoggedin to true
      */
-    if(Cookies.get('username')) {
-        isLoggedinToTrue()
-    }
+    useEffect( () => {
+        const fetchUser = async () => {
+            const jwtUser =  await getUserFromLocalCookie()
+            const magicCheck= await checkUserLoggedIn()
+            if(jwtUser !== undefined && magicCheck === true) {
+                isUserLoggedinToTrue()
+            }
+            console.log(jwtUser, magicCheck)
+        }
+        
+        fetchUser()
+            .catch(err => console.log(err))
+    }, []);
+
 
     return <>
         <TopSection />

@@ -173,7 +173,7 @@ const Cart = ({cloths}) => {
                     <p>{`$${totalCost}`}</p>
                 </div>
             </div>
-            <button class="" type="button" className="SS_ProductCheckout css style" data-id="1" data-url="http://localhost:1337"> BuyNow </button>
+            {/* <button class="" type="button" className="SS_ProductCheckout css style" data-id="1" data-url="http://localhost:1337"> BuyNow </button> */}
         </section>
         </>
     )

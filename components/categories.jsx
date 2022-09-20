@@ -5,12 +5,13 @@ import Router from 'next/router'
 import { useAuthContext } from '../lib/authContext'
 
 export default function Categories() {
-    const { isLoggedin } = useAuthContext()
+    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext()
     const routeToCategory = (e) => {
         e.preventDefault()
-        if(isLoggedin) {
+        if(isUserLoggedin) {
             Router.push(`/${e.currentTarget.dataset.category}`)
         }else {
+            isUserLoggedinToFalse()
             Router.push('/login')
         }
     }

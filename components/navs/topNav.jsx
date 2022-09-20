@@ -7,22 +7,27 @@ import { useAuthContext } from '../../lib/authContext'
 import { unsetToken } from '../../lib/auth'
 
 export default function TopNav() {
-    const { cartItemsNo, user, logoutUser } = useGlobalContext()
-    const { useFetchUser, isLoggedin, isLoggedinToFalse } = useAuthContext()
-    const data = useFetchUser()
+    const { cartItemsNo, user } = useGlobalContext()
+    const { useFetchUser, isUserLoggedin, isUserLoggedinToFalse, logoutUser } = useAuthContext()
+    // const data = useFetchUser()
 
-    // const [userState, setUserState] = useState(useFetchUser())
+    const handleLogout = (e) => {
+        e.preventDefault()
+        logoutUser()
+        unsetToken()
+        isUserLoggedinToFalse()
+    }
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         console.log(data)
-    //     }, 2000)
-    //     return () => {
-    //         clearInterval(interval)
-    //     }
-    // })
+    useEffect(() => {
+        const interval = setInterval(() => {
+            console.log(isUserLoggedin)
+        }, 2000)
+        return () => {
+            clearInterval(interval)
+        }
+    })
 
-    if(isLoggedin) {
+    if(isUserLoggedin) {
         return (
             <nav className='hidden md:grid grid-cols-3 items-center text-veryDeepBlue text-[12px] h-24 px-14'>
                 <ul className='flex'>
@@ -70,11 +75,7 @@ export default function TopNav() {
                     </li>
                     <li className=' hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>
                         <a
-                            // onClick={() => logoutUser()}
-                            onClick={() => {
-                                unsetToken()
-                                isLoggedinToFalse()
-                            }}
+                            onClick={() => handleLogout}
                         >
                             LOGOUT {user}
                         </a>
@@ -84,7 +85,7 @@ export default function TopNav() {
         )
     }
 
-    if(!isLoggedin) {
+    if(!isUserLoggedin) {
         return (
             <nav className='hidden md:grid grid-cols-3 items-center text-veryDeepBlue text-[12px] h-24 px-14'>
                 <ul className='flex'>
