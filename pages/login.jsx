@@ -30,10 +30,7 @@ export default function Login() {
         if(responseData.user) {
             loginUser(userDetails)
             setToken(responseData)
-            // setIsUserInvalid(false)
             setIsResponsedata(true)
-            // isUserLoggedinToTrue()
-            // console.log(Object.keys(userDetails))
         } else {
             setIsUserInvalid(true)
             console.log(responseData)
@@ -54,13 +51,6 @@ export default function Login() {
             fetchUser()
             .catch(err => console.log(err))
     }, [isResponseData, getUserFromLocalCookie, checkUserLoggedIn])
-
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         console.log(checkUserLoggedIn())
-
-    //     }, 3000)
-    // })
 
 
     if(!isUserInvalid) {

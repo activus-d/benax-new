@@ -5,10 +5,10 @@ const GlobalContext = React.createContext();
 
 
 const GlobalProvider = ({ children }) => {
-    //CONTEXT FOR STATE AND FUNCTIONS FOR MANAGING CART ITEMS
     const [cartItemsNo, setCartItemsNo] = useState(0);
     const [cartBagItems, setBagCartItems] = useState([]);
     const [cartClothItems, setClothCartItems] = useState([]);
+    
     const addCartItem = () => {
         setCartItemsNo(cartItemsNo + 1)
     };

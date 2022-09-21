@@ -51,12 +51,6 @@ const Cart = ({cloths}) => {
         setTotalCost(+total.toFixed(2));
     }, [items])
 
-    // useEffect(() => {
-    //     const interval = setTimeout(() => {
-    //         console.log(items)
-    //     }, 3000)
-    // })
-
     const addQuantity = (slug, quantity, product_price, category) => {
         const newItems = items.map(item => {
             let originalPrice; 
@@ -116,7 +110,7 @@ const Cart = ({cloths}) => {
     
     return (
         <>
-        <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script>
+        {/* <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script> */}
         <section className='text-deepBlue mx-5 md:mx-20 lg:mx-28 flex flex-col items-center relative'>
             <h2 className='font-bold py-2 mb-4 border-b-2 border-lightGrey'>SHOPPING BAG {`(${items.length})`}</h2>
             {items.map((item) => {

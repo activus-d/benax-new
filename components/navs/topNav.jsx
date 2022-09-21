@@ -9,7 +9,6 @@ import { unsetToken } from '../../lib/auth'
 export default function TopNav() {
     const { cartItemsNo, user } = useGlobalContext()
     const { useFetchUser, isUserLoggedin, isUserLoggedinToFalse, logoutUser } = useAuthContext()
-    // const data = useFetchUser()
 
     const handleLogout = (e) => {
         e.preventDefault()
@@ -17,15 +16,6 @@ export default function TopNav() {
         unsetToken()
         isUserLoggedinToFalse()
     }
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            console.log(isUserLoggedin)
-        }, 2000)
-        return () => {
-            clearInterval(interval)
-        }
-    })
 
     if(isUserLoggedin) {
         return (
@@ -58,8 +48,20 @@ export default function TopNav() {
                     </Link>
                 </div>
                 <ul className='flex justify-center justify-self-end'>
+                    {
+                        /**
+                         * Future Update
+                         * Studio
+                         */
+                    }
                     {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>STUDIO</li> */}
                     <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>ABOUT</li>
+                    {
+                        /**
+                         * Future Update
+                         * search functionality
+                         */
+                    }
                     {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
                         <button>
                             <BsSearch />
@@ -75,7 +77,7 @@ export default function TopNav() {
                     </li>
                     <li className=' hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>
                         <a
-                            onClick={() => handleLogout}
+                            onClick={handleLogout}
                         >
                             LOGOUT {user}
                         </a>
@@ -116,8 +118,20 @@ export default function TopNav() {
                     </Link>
                 </div>
                 <ul className='flex justify-center justify-self-end'>
+                    {
+                        /**
+                         * Future Update
+                         * Studio
+                         */
+                    }
                     {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>STUDIO</li> */}
                     <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>ABOUT</li>
+                    {
+                        /**
+                         * Future Update
+                         * search functionality
+                         */
+                    }
                     {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
                         <button>
                             <BsSearch />

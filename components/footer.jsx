@@ -6,7 +6,7 @@ import { FaTwitterSquare } from 'react-icons/fa'
 
 export default function Footer() {
     return (
-        <section className='bg-deepBlue text-white px-5 pb-10 md:px-14 text-[14px] sm:text-[16px]'>
+        <section className='bg-deepBlue text-veryLightGrey px-5 pb-10 md:px-14 text-[14px] sm:text-[16px]'>
             <section className='md:grid md:grid-cols-5 md:gap-x-20'>
                 <div className='my-7 md:col-start-1 col-span-3'>
                     <form className='w-full text-xl my-3'>
@@ -14,7 +14,7 @@ export default function Footer() {
                             <label htmlFor='subscribe' className='mr-3 text-[14px]'>Email :</label>
                             <input name='subscribe' type='text' id='subscribe' placeholder='enter you email' className='bg-deepBlue outline-none text-[16px] w-40 sm:w-auto md:w-24 xl:w-auto' />
                         </div>
-                        <button className='w-full bg-white text-deepBlue text-2xl font-bold flex items-center justify-center h-10 cursor-pointer sm:hover:bg-deepBlue sm:hover:text-white '>
+                        <button className='w-full bg-veryLightGrey text-deepBlue text-2xl font-bold flex items-center justify-center h-10 cursor-pointer sm:hover:bg-deepBlue sm:hover:text-white '>
                             <MdDoubleArrow />  
                             SUBSCRIBE
                         </button>

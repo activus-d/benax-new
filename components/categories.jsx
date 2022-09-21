@@ -6,15 +6,6 @@ import { useAuthContext } from '../lib/authContext'
 
 export default function Categories() {
     const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext()
-    const routeToCategory = (e) => {
-        e.preventDefault()
-        if(isUserLoggedin) {
-            Router.push(`/${e.currentTarget.dataset.category}`)
-        }else {
-            isUserLoggedinToFalse()
-            Router.push('/login')
-        }
-    }
 
     return (
         <section className='pt-10 px-5 basis-1/2 font-semibold md:px-0 md:pl-14 md:mr-14' id='categories'>
@@ -28,7 +19,7 @@ export default function Categories() {
                 </li> */}
                 <li 
                     className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'
-                    onClick={routeToCategory}
+                    onClick={() => Router.push('/clothing')}
                     data-category='clothing'
                 >
                     <span>
@@ -38,7 +29,7 @@ export default function Categories() {
                 </li>
                 <li 
                     className='flex items-center justify-between h-14 border-b border-b-lightGrey hover:text-lightGrey cursor-pointer'
-                    onClick={routeToCategory}
+                    onClick={() => Router.push('/bags')}
                     data-category='bags'
                 >
                     <span>

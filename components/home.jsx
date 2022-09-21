@@ -15,6 +15,7 @@ const HomePage = () => {
 
 
     /**
+     * fetchUser
      * check if user cookies is present
      * if user cookies is present then set isLoggedin to true
      */
@@ -31,7 +32,6 @@ const HomePage = () => {
         fetchUser()
             .catch(err => console.log(err))
     }, []);
-
 
     return <>
         <TopSection />

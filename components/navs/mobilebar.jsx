@@ -16,7 +16,6 @@ export default function MobileBar() {
 
     const handleNav = () => {
         const element = ulRef.current
-        // element.classList.contains('show') ?  element.classList.remove('show') :  element.classList.add('show')
         if(!element.classList.contains('show')) {
             setIsMobileNavHeight(true)
             element.classList.add('show')
@@ -32,7 +31,6 @@ export default function MobileBar() {
             if(element.classList.contains('show')) {
             setIsMobileNavHeight(false)
             element.classList.remove('show')
-            console.log('mobileNav')
         }
         return () => {
             clearTimeout(timeout)

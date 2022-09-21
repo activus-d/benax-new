@@ -8,11 +8,10 @@ export default function NewProduct() {
     const product3 = jackets.items[2]
 
     const trial = (e) => {
-        // const category = e.currentTarget.dataset.category
         const category = products.filter(product => product.category === e.currentTarget.dataset.category)
         console.log(category)
     }
-    // console.log(products.jackets)
+    
     return (
         <section className='px-5 w-full md:px-14 text-deepBlue py-5'>
             <h2 className='py-5 text-2xl sm:text-4xl'>NEW PRODUCTS</h2>
