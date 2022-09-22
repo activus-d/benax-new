@@ -5,7 +5,13 @@ import { bagsData } from './bags';
 import { clothsData } from './clothing';
 import { AiOutlineMinus } from 'react-icons/ai';
 import { AiOutlinePlus } from 'react-icons/ai';
-import script from 'next/script'
+import { loadStripe } from '@stripe/stripe-js'
+import getStripe from '../lib/stripe'
+
+const cartItems = {
+    price: '999',
+    quantity: 2
+}
 
 const Cart = ({cloths}) => {
     const { cartBagItems, cartClothItems, removeCartItem } = useGlobalContext();
@@ -108,9 +114,28 @@ const Cart = ({cloths}) => {
         removeCartItem(category, id, slug)
     };
     
+
+    const handleBuy = async()=>{
+        const stripe = await getStripe()
+        const res = await fetch('/api/stripe', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(cartItems),
+        })
+    if(res.statusCode === 500) return
+    const data = await res.json()
+    console.log(data)
+    // toast.loading('Redirecting...')
+    stripe.redirectToCheckout({sessionId: data.id})
+}
+
+    
+
+
     return (
         <>
-        {/* <script type="text/javascript" src="http://localhost:1337/plugins/strapi-stripe/static/stripe.js" > </script> */}
         <section className='text-deepBlue mx-5 md:mx-20 lg:mx-28 flex flex-col items-center relative'>
             <h2 className='font-bold py-2 mb-4 border-b-2 border-lightGrey'>SHOPPING BAG {`(${items.length})`}</h2>
             {items.map((item) => {
@@ -167,7 +192,12 @@ const Cart = ({cloths}) => {
                     <p>{`$${totalCost}`}</p>
                 </div>
             </div>
-            {/* <button class="" type="button" className="SS_ProductCheckout css style" data-id="1" data-url="http://localhost:1337"> BuyNow </button> */}
+            <button
+                className='block mx-auto mt-16 mb-2 w-72 py-3 bg-[#0BA065] text-veryLightGrey rounded-md'
+                    onClick={handleBuy}
+                >
+                    Pay
+            </button>
         </section>
         </>
     )
