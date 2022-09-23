@@ -55,8 +55,8 @@ export default function MobileBar() {
                     <div className=' relative flex justify-center items-center px-3'>
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
-                                <BsCart className='text-[32px]' />
-                                <span className='absolute top-[1px] text-red-500 font-bold'>{cartItemsNo}</span>
+                                <BsCart className='text-[2.2rem]' />
+                                <span className='absolute top-[2px] text-red-500 font-bold'>{cartItemsNo}</span>
                             </a>
                         </Link>
                     </div>

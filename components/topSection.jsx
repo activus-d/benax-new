@@ -1,6 +1,7 @@
 import React, {useRef, useEffect, useState, Children} from 'react'
-import {BsArrowDown} from 'react-icons/bs'
 import Link from 'next/link'
+
+import {BsArrowDown} from 'react-icons/bs'
 
 export default function TopSection() {
     const [slideIndex, setSlideIndex] = useState(0)

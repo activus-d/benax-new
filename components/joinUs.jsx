@@ -1,4 +1,5 @@
 import React from 'react'
+
 import Image from 'next/image'
 import image18 from '../public/assets/image18.jpg'
 import image19 from '../public/assets/image19.jpg'

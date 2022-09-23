@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import Head from 'next/head'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+
 import MobileBar from './navs/mobilebar'
 import TopNav from './navs/topNav'
 import Footer from './footer'
@@ -15,6 +18,15 @@ export default function Layout({children}) {
             clearTimeout(timeout)
         }
     }, [])
+
+    const contextClass = {
+    success: "bg-deepBlue text-veryLightGrey",
+    error: "bg-red-600",
+    info: "bg-red-500",
+    warning: "bg-orange-400",
+    default: "bg-deepBlue",
+    dark: "bg-white-600 font-gray-300",
+};
 
     if(!isDomLoaded) {
         return <main className='bg-veryDeepBlue h-screen w-screen flex justify-center items-center'>
@@ -40,6 +52,18 @@ export default function Layout({children}) {
                 <footer>
                     <Footer />
                 </footer>
+                <ToastContainer
+                toastClassName={({ type }) => contextClass[type || "default"] + 
+                    " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer"
+                }
+                    position="top-center"
+                    autoClose={2000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                />
             </>
         )
     }

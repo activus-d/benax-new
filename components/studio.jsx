@@ -3,7 +3,7 @@ import { RiArrowLeftCircleFill } from 'react-icons/ri'
 import { RiArrowRightCircleFill } from 'react-icons/ri'
 import { studioPhotos } from './data'
 
-export default function Studio() {
+export default function Studio({title}) {
     const [photos, setPhotos] = useState([studioPhotos[0]])
     const [isNext, setIsNext] = useState(true)
     const [isPrev, setIsPrev] = useState(false)
@@ -22,7 +22,7 @@ export default function Studio() {
         }
     };
 
-    const handleNext = () => {
+    const handleNext = ({title}) => {
         const id = mySlides.current.dataset.id
         console.log(id + 'n')
         if(id <= studioPhotos.length) {
@@ -44,7 +44,7 @@ export default function Studio() {
 
     return (
         <section className='flex flex-col text-deepBlue md:w-1/2'>
-            <h2 className='text-2xl mb-5 ml-5 sm:text:4xl md:ml-0'>STUDIO</h2>
+            <h2 className='text-2xl mb-5 ml-5 sm:text:4xl md:ml-0'>{title}</h2>
             <div className="relative w-full">
                 {photos.map(photo => {
                     const {id, src} = photo

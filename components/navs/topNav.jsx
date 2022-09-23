@@ -28,7 +28,7 @@ export default function TopNav() {
                     </li>
                     <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
                         <Link href='/studio'>
-                            <a>COLLECTION</a>
+                            <a>STUDIO</a>
                         </Link>
                     </li>
                     <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>

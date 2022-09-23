@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+
 import { products } from './data'
 
 export default function NewProduct() {
@@ -11,7 +12,7 @@ export default function NewProduct() {
         const category = products.filter(product => product.category === e.currentTarget.dataset.category)
         console.log(category)
     }
-    
+
     return (
         <section className='px-5 w-full md:px-14 text-deepBlue py-5'>
             <h2 className='py-5 text-2xl sm:text-4xl'>NEW PRODUCTS</h2>

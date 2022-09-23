@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+
 import Categories from './categories'
 import TopSection from './topSection'
 import NewProduct from './newProducts'
@@ -12,7 +13,6 @@ import { getUserFromLocalCookie } from '../lib/auth'
 
 const HomePage = () => {
     const { isUserLoggedinToTrue, checkUserLoggedIn } = useAuthContext()
-
 
     /**
      * fetchUser
@@ -41,7 +41,9 @@ const HomePage = () => {
             <TwoItemsSection />
         </section>
         <section className='mt-14 sm:block md:flex md:mx-14'>
-            <Studio />
+            <Studio
+                title='STUDIO'
+            />
             <BookAppointment />
         </section>
         <JoinUs />
