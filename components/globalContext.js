@@ -3,11 +3,21 @@ import { useRouter } from 'next/router'
 
 const GlobalContext = React.createContext();
 
+let bagData;
+let clothData;
+let storedCartItemsNo;
 
 const GlobalProvider = ({ children }) => {
     const [cartItemsNo, setCartItemsNo] = useState(0);
     const [cartBagItems, setBagCartItems] = useState([]);
     const [cartClothItems, setClothCartItems] = useState([]);
+    const [storedCartNoState, setStoredCartNoState] = useState(0)
+
+    useEffect(() => {
+      if(localStorage.getItem('storedCartNo') !== null) {
+        setCartItemsNo( +(JSON.parse(localStorage.getItem('storedCartNo'))) )
+      }
+    })
     
     const addCartItem = () => {
         setCartItemsNo(cartItemsNo + 1)
@@ -18,23 +28,37 @@ const GlobalProvider = ({ children }) => {
       if(category === 'bag') {
         newBagItems = cartBagItems.filter(cartItem => cartItem.id !== id)
         setBagCartItems(newBagItems)
+        bagData = newBagItems
+        localStorage.setItem('storedBagDataCart', JSON.stringify(newBagItems))
       }
       if(category === 'cloth') {
         newClothItems = cartClothItems.filter(cartItem => cartItem.id !== id)
         setClothCartItems(newClothItems)
+        clothData = newClothItems
+        localStorage.setItem('storedClothDataCart', JSON.stringify(clothData))
       }
       setCartItemsNo(cartItemsNo - 1)
+      storedCartItemsNo = cartItemsNo - 1
+      localStorage.setItem('storedCartNo', storedCartItemsNo)
     };
     const addToCart = (item) => {
         if(item.category === 'bag') {
           if(cartBagItems.every(cartItem => cartItem.id !== item.id)) {
             setBagCartItems([...cartBagItems, item]);
+            bagData = [...cartBagItems, item]
+            localStorage.setItem('storedBagDataCart', JSON.stringify(bagData))
+            storedCartItemsNo = cartItemsNo + 1
+            localStorage.setItem('storedCartNo', storedCartItemsNo)
             setCartItemsNo(cartItemsNo + 1)
           }
         }
         if(item.category === 'cloth') {
           if(cartClothItems.every(cartItem => cartItem.id !== item.id)) {
             setClothCartItems([...cartClothItems, item]);
+            clothData = [...cartClothItems, item]
+            localStorage.setItem('storedClothDataCart', JSON.stringify(clothData))
+            storedCartItemsNo = cartItemsNo + 1
+            localStorage.setItem('storedCartNo', storedCartItemsNo)
             setCartItemsNo(cartItemsNo + 1)
           }
         }

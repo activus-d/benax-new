@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { useGlobalContext } from '../components/globalContext'
 import { useAuthContext } from '../lib/authContext'
 import { fetcher } from '../lib/api'
@@ -7,7 +8,7 @@ import Link from 'next/link'
 
 export default function Register() {
     const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''})
-    const { isLoggedin, isLoggedinToTrue } = useAuthContext()
+    const { isLoggedin, isLoggedinToTrue, loginUser } = useAuthContext()
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,6 +27,7 @@ export default function Register() {
           method: 'POST',
         }
       );
+      loginUser(userDetails)
       setToken(responseData);
       router.redirect('/');
     } catch (error) {
@@ -40,6 +42,7 @@ export default function Register() {
             <h2 className='font-medium mb-3'>REGISTER</h2>
             <form 
                 className='flex flex-col items-center justify-center w-72 bg-veryLightGrey py-4 rounded sm:w-96 md:w-[550px]'
+                onSubmit={handleSubmit}
             >
                 <input 
                     className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
@@ -77,7 +80,6 @@ export default function Register() {
                 <button 
                     type='submit'
                     className='bg-deepBlue text-veryLightGrey w-56 py-1 rounded-md xl:hover:scale-110'
-                    onClick={handleSubmit}
                 >
                     Register
                 </button>

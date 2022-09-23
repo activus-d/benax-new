@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Router from 'next/router'
 import useSWR from 'swr'
 import Link from 'next/link'
+import { toast } from 'react-toastify';
+import Router from 'next/router'
+
+import { GiReturnArrow } from 'react-icons/gi'
 
 import { fetcher } from "../lib/api"
 import { MdOutlineFavorite } from 'react-icons/md'
@@ -9,30 +12,24 @@ import { useGlobalContext } from "../components/globalContext"
 import { useAuthContext } from "../lib/authContext"
 import { getUserFromLocalCookie } from '../lib/auth'
 
-
+/**
+ * bagsData
+ * take in bags addeded
+ * to be exported to the cart page
+ */
 export let bagsData;
 const BagList = ({bags}) => {
-    const { isUserLoggedin, checkUserLoggedIn, isUserLoggedinToTrue } = useAuthContext()
-    const { addCartItem, removeCartItem, addToCart, cartBagItems, cartItemsNo } = useGlobalContext()
+    const { isUserLoggedin, loginConfirmation } = useAuthContext()
+    const [timer, setTimer] = useState(false)
+    const { addToCart } = useGlobalContext()
 
     const [ isOrderConfirmed, setIsOrderConfirmed ] = useState(false)
 
     /**
+     * loginConfirmation
      * Check if on reload of the page user is logged in and authorised
      */
-    useEffect(() => {
-        if(!isUserLoggedin) {
-            const fetchUser = async () => {
-                const jwtUser =  await getUserFromLocalCookie()
-                const magicCheck= await checkUserLoggedIn()
-                if(jwtUser !== undefined && magicCheck === true) {
-                    isUserLoggedinToTrue()
-                }
-            }
-            fetchUser()
-            .catch(err => console.log(err))
-        }
-    }, [isUserLoggedin])
+    loginConfirmation()
 
     /**
      * useSWR 
@@ -48,26 +45,42 @@ const BagList = ({bags}) => {
         }
     )
 
-    bagsData = data
+    const addNotice = (product_name) => toast.success(
+        `${product_name} added to cart`
+    );
+    const timerNotice = () => toast.info(
+        `please wait for some seconds`
+    );
 
-    const handleAddToCart = (category, id, slug) => {
-        // addCartItem();
-        if(isUserLoggedin) {
-            const item = {category, id, slug}
-            addToCart(item)
+    useEffect(() => {
+        isUserLoggedin && setTimer(true)
+    }, [isUserLoggedin])
+
+    const handleAddToCart = (category, id, slug, product_name) => {
+        if(timer) {
+            if(isUserLoggedin) {
+                const item = {category, id, slug}
+                addToCart(item)
+                addNotice(product_name)
+            }else {
+                Router.push('/login')
+            }
         }else {
-            Router.push('/login')
+            timerNotice()
         }
-    }
-
-    const confirmOrder = (e) => {
-        e.preventDefault()
-        setIsOrderConfirmed(true)
     }
 
     return (
         <section className="text-deepBlue mb-7 px-5 md:px-14" style={{zIndex: '0'}}>
-            <h2 className="text-center text-3xl mb-7">BAGS</h2>
+            <div className='mb-5 relative'>
+                <button 
+                    className='flex justify-center items-center bg-deepBlue text-veryLightGrey  rounded-md h-8 w-14 absolute left-0'
+                    onClick={() => Router.push('/categories')}
+                >
+                    <GiReturnArrow />
+                </button>
+                <h2 className="text-center text-3xl">BAGS</h2>
+            </div>
             <div className="sm:grid sm:grid-cols-2 sm:gap-5 xl:grid-cols-3 xl:gap-x-28 xl:gap-y-10">
                 {data.data.map(item => {
                     const {id, attributes} = item
@@ -85,7 +98,7 @@ const BagList = ({bags}) => {
                             <p>{`$${product_price}`}</p>
                             <button 
                                 className='bg-deepBlue text-veryLightGrey px-4 py-1 hover:scale-110'
-                                onClick={() => handleAddToCart(category, id, slug)}
+                                onClick={() => handleAddToCart(category, id, slug, product_name)}
                             >
                                 Add to Cart
                             </button>
@@ -105,7 +118,7 @@ const BagList = ({bags}) => {
             {
                 /**
                  * Future Update
-                 * ability ti be able to confirm order and saved item added to cart to server to enable retrieval upon relogging in as a user
+                 * ability to to confirm order and saved item added to cart to server to enable retrieval upon relogging in as a user
                  */
             }
             {/* {
@@ -150,7 +163,5 @@ export async function getStaticProps() {
         }
     }
 }
-
-//another option is to use the fetch API with the useEffect in react.
 
 export default BagList

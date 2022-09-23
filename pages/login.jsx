@@ -66,7 +66,7 @@ export default function Login() {
                         type="text"
                         name='identifier'
                         required
-                        // autocomplete="off"
+                        autoComplete="off"
                         value={userDetails.name}
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter your name'
@@ -76,7 +76,7 @@ export default function Login() {
                         name='email'
                         type='email'
                         required
-                        // autocomplete="off"
+                        autoComplete="off"
                         value={userDetails.email}
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter your email'
@@ -86,8 +86,8 @@ export default function Login() {
                         name='password'
                         minLength="8" 
                         required
-                        autocomplete="off"
-                        // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        autoComplete="off"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         title="Must contain at least one number and one uppercase and   lowercase letter, and at least 8 or more characters"
                         type='password'
                         value={userDetails.password}
