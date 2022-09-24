@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import { RiArrowLeftCircleFill } from 'react-icons/ri'
 import { RiArrowRightCircleFill } from 'react-icons/ri'
 import { studioPhotos } from './data'
@@ -8,6 +8,7 @@ export default function Studio({title}) {
     const [isNext, setIsNext] = useState(true)
     const [isPrev, setIsPrev] = useState(false)
     const mySlides = useRef(null)
+    const docSlide = useRef(null)
 
     const handlePrev = () => {
         const id = mySlides.current.dataset.id
@@ -42,10 +43,19 @@ export default function Studio({title}) {
         }
     };
 
+    let touchstartX = 0
+    let touchendX = 0
+    
+    function checkDirection() {
+      if (touchendX < touchstartX) alert('swiped left!')
+      if (touchendX > touchstartX) alert('swiped right!')
+    }
+
+
     return (
         <section className='flex flex-col text-deepBlue md:w-1/2'>
             <h2 className='text-2xl mb-5 ml-5 sm:text:4xl md:ml-0'>{title}</h2>
-            <div className="relative w-full">
+            <div className="relative w-full" ref={docSlide}>
                 {photos.map(photo => {
                     const {id, src} = photo
                     return(

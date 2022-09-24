@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import useSWR from 'swr'
-import Link from 'next/link'
 import { toast } from 'react-toastify';
 import Router from 'next/router'
 
 import { GiReturnArrow } from 'react-icons/gi'
 
 import { fetcher } from "../lib/api"
-import { MdOutlineFavorite } from 'react-icons/md'
 import { useGlobalContext } from "../components/globalContext"
 import { useAuthContext } from "../lib/authContext"
-import { getUserFromLocalCookie } from '../lib/auth'
 
 /**
  * bagsData
@@ -19,17 +16,8 @@ import { getUserFromLocalCookie } from '../lib/auth'
  */
 export let bagsData;
 const BagList = ({bags}) => {
-    const { isUserLoggedin, loginConfirmation } = useAuthContext()
-    const [timer, setTimer] = useState(false)
+    const { isUserLoggedin } = useAuthContext()
     const { addToCart } = useGlobalContext()
-
-    const [ isOrderConfirmed, setIsOrderConfirmed ] = useState(false)
-
-    /**
-     * loginConfirmation
-     * Check if on reload of the page user is logged in and authorised
-     */
-    loginConfirmation()
 
     /**
      * useSWR 
@@ -48,25 +36,14 @@ const BagList = ({bags}) => {
     const addNotice = (product_name) => toast.success(
         `${product_name} added to cart`
     );
-    const timerNotice = () => toast.info(
-        `please wait for some seconds`
-    );
-
-    useEffect(() => {
-        isUserLoggedin && setTimer(true)
-    }, [isUserLoggedin])
-
+    
     const handleAddToCart = (category, id, slug, product_name) => {
-        if(timer) {
-            if(isUserLoggedin) {
-                const item = {category, id, slug}
-                addToCart(item)
-                addNotice(product_name)
-            }else {
-                Router.push('/login')
-            }
+        if(isUserLoggedin) {
+            const item = {category, id, slug}
+            addToCart(item)
+            addNotice(product_name)
         }else {
-            timerNotice()
+            Router.push('/login')
         }
     }
 

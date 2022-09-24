@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router'
 
 const GlobalContext = React.createContext();
 
@@ -11,13 +10,18 @@ const GlobalProvider = ({ children }) => {
     const [cartItemsNo, setCartItemsNo] = useState(0);
     const [cartBagItems, setBagCartItems] = useState([]);
     const [cartClothItems, setClothCartItems] = useState([]);
-    const [storedCartNoState, setStoredCartNoState] = useState(0)
 
     useEffect(() => {
       if(localStorage.getItem('storedCartNo') !== null) {
         setCartItemsNo( +(JSON.parse(localStorage.getItem('storedCartNo'))) )
-      }
-    })
+      };
+      if(localStorage.getItem('storedBagDataCart') !== null) {
+        setBagCartItems(JSON.parse(localStorage.getItem('storedBagDataCart')))
+      };
+      if(localStorage.getItem('storedClothDataCart') !== null) {
+        setClothCartItems(JSON.parse(localStorage.getItem('storedClothDataCart')))
+      };
+    }, [])
     
     const addCartItem = () => {
         setCartItemsNo(cartItemsNo + 1)

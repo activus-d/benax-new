@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useGlobalContext } from '../components/globalContext'
+import { useState } from 'react'
 import { useAuthContext } from '../lib/authContext'
 import { fetcher } from '../lib/api'
-import { setToken, unsetToken, getUserFromLocalCookie } from '../lib/auth'
+import { setToken} from '../lib/auth'
 import Link from 'next/link'
 import Router from 'next/router'
 
@@ -10,7 +9,7 @@ export default function Login() {
     const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''})
     const [isResponseData, setIsResponsedata] = useState(false)
     const [isUserInvalid, setIsUserInvalid] = useState(false)
-    const { isLoggedin, isUserLoggedinToTrue, loginUser, checkUserLoggedIn  } = useAuthContext()
+    const { isUserLoggedinToTrue, setCurrentUser } = useAuthContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -28,30 +27,15 @@ export default function Login() {
             }
         );
         if(responseData.user) {
-            loginUser(userDetails)
             setToken(responseData)
+            isUserLoggedinToTrue()
             setIsResponsedata(true)
+            Router.push('/')
         } else {
             setIsUserInvalid(true)
             console.log(responseData)
         }
     };
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const jwtUser =  await getUserFromLocalCookie()
-            const magicCheck= await checkUserLoggedIn()
-            if(isResponseData === true && jwtUser !== undefined && magicCheck === true) {
-                isUserLoggedinToTrue()
-                setIsUserInvalid(false)
-                Router.push('/')
-            }
-                console.log(jwtUser, magicCheck)
-            }
-            fetchUser()
-            .catch(err => console.log(err))
-    }, [isResponseData, getUserFromLocalCookie, checkUserLoggedIn])
-
 
     if(!isUserInvalid) {
         return (
@@ -71,7 +55,7 @@ export default function Login() {
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter your name'
                     />
-                    <input 
+                    {/* <input 
                         className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
                         name='email'
                         type='email'
@@ -80,7 +64,7 @@ export default function Login() {
                         value={userDetails.email}
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter your email'
-                    />
+                    /> */}
                     <input 
                         className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
                         name='password'
@@ -120,7 +104,7 @@ export default function Login() {
                     <button 
                         type='submit'
                         className='bg-deepBlue text-veryLightGrey w-32 py-1 rounded-md xl:hover:scale-110 mx-3'
-                        onClick={() => Router.reload('/login')}
+                        onClick={() => setIsUserInvalid(false)}
                     >
                         Login
                     </button>

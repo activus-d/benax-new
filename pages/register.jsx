@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import Router from 'next/router'
 
-import { useGlobalContext } from '../components/globalContext'
 import { useAuthContext } from '../lib/authContext'
 import { fetcher } from '../lib/api'
-import { setToken, unsetToken } from '../lib/auth'
+import { setToken } from '../lib/auth'
 import Link from 'next/link'
 
 export default function Register() {
     const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''})
-    const { isLoggedin, isLoggedinToTrue, loginUser } = useAuthContext()
+    const [isUserInvalid, setIsUserInvalid] = useState(false)
+    const { isLoggedinToTrue } = useAuthContext()
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,16 +28,16 @@ export default function Register() {
           method: 'POST',
         }
       );
-      loginUser(userDetails)
       setToken(responseData);
-      router.redirect('/');
+      setIsUserInvalid(false)
+      Router.push('/login');
     } catch (error) {
       console.error(error);
+      setIsUserInvalid(false)
     }
   };
 
-
-
+  if(!isUserInvalid) {
     return (
         <section className='flex flex-col items-center mb-10'>
             <h2 className='font-medium mb-3'>REGISTER</h2>
@@ -91,4 +92,32 @@ export default function Register() {
             </form>
         </section>
     )
+  }
+
+    if(isUserInvalid) {
+        return (
+            <section
+                className='mx-auto w-screen flex flex-col items-center justify-center px-2 bg-veryLightGrey py-4 rounded sm:w-96 md:w-[550px] mb-7'
+            >
+                <p className='mb-9 text-red-500 text-center'>Please try again with another username or login if you are already.</p>
+                <div className='flex'>
+                    <button 
+                        type='submit'
+                        className='bg-deepBlue text-veryLightGrey w-32 py-1 rounded-md xl:hover:scale-110 mx-3'
+                        onClick={() => setIsUserInvalid(false)}
+                    >
+                        Login
+                    </button>
+                    <button 
+                        type='submit'
+                        className='bg-deepBlue text-veryLightGrey w-28 py-1 rounded-md xl:hover:scale-110 mx-3'
+                        onClick={() => Router.push('/register')}
+                    >
+                        Register
+                    </button>
+                </div>
+
+            </section>
+        )
+    }
 }

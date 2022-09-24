@@ -1,6 +1,5 @@
 import { useGlobalContext } from "../components/globalContext";
 import Link from 'next/link'
-import { useAmp } from "next/amp";
 
 export default function Account() {
     const { user, logoutUser } = useGlobalContext()

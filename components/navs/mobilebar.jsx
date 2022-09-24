@@ -12,6 +12,7 @@ export default function MobileBar() {
     const [isMobileNavHeight, setIsMobileNavHeight] = useState(false);
     const ulRef = useRef(null)
     const { cartItemsNo, user } = useGlobalContext()
+    const [navCartDisplay, setNavCartDisplay] = useState(0)
     const { useFetchUser, isUserLoggedin, isUserLoggedinToFalse, logoutUser } = useAuthContext()
 
     const handleNav = () => {
@@ -40,10 +41,17 @@ export default function MobileBar() {
 
     const handleLogout = (e) => {
         e.preventDefault()
-        logoutUser()
         unsetToken()
         isUserLoggedinToFalse()
     };
+
+    useEffect(() => {
+        if(isUserLoggedin) {
+            setNavCartDisplay(cartItemsNo)
+        }else {
+            setNavCartDisplay(0)
+        }
+    }, [isUserLoggedin])
 
     if (isUserLoggedin) {
         return(
@@ -56,7 +64,7 @@ export default function MobileBar() {
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
                                 <BsCart className='text-[2.2rem]' />
-                                <span className='absolute top-[2px] text-red-500 font-bold'>{cartItemsNo}</span>
+                                <span className='absolute top-[2px] text-red-500 font-bold'>{navCartDisplay}</span>
                             </a>
                         </Link>
                     </div>

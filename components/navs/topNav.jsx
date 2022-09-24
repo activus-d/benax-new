@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { BsSearch } from 'react-icons/bs'
 import { BsCart } from 'react-icons/bs'
 import Link from 'next/link'
 import { useGlobalContext } from '../globalContext'
@@ -8,14 +7,22 @@ import { unsetToken } from '../../lib/auth'
 
 export default function TopNav() {
     const { cartItemsNo, user } = useGlobalContext()
-    const { useFetchUser, isUserLoggedin, isUserLoggedinToFalse, logoutUser } = useAuthContext()
+    const [navCartDisplay, setNavCartDisplay] = useState(0)
+    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext()
 
     const handleLogout = (e) => {
         e.preventDefault()
-        logoutUser()
         unsetToken()
         isUserLoggedinToFalse()
     }
+
+    useEffect(() => {
+        if(isUserLoggedin) {
+            setNavCartDisplay(cartItemsNo)
+        }else {
+            setNavCartDisplay(0)
+        }
+    }, [isUserLoggedin])
 
     if(isUserLoggedin) {
         return (
@@ -71,7 +78,7 @@ export default function TopNav() {
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
                                 <BsCart className='text-[32px]' />
-                                <span className='absolute top-[5px] text-red-500 font-bold'>{cartItemsNo}</span>
+                                <span className='absolute top-[5px] text-red-500 font-bold'>{isUserLoggedin ? cartItemsNo : 0}</span>
                             </a>
                         </Link>
                     </li>
@@ -141,7 +148,7 @@ export default function TopNav() {
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
                                 <BsCart className='text-[32px]' />
-                                <span className='absolute top-[5px] text-red-500 font-bold'>{cartItemsNo}</span>
+                                <span className='absolute top-[5px] text-red-500 font-bold'>{navCartDisplay}</span>
                             </a>
                         </Link>
                     </li>
