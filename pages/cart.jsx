@@ -7,14 +7,8 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { useAuthContext } from '../lib/authContext';
 import { useGlobalContext } from "../components/globalContext";
 import { fetcher } from '../lib/api';
-// import { bagsData } from './bags';
-// import { clothsData } from './clothing';
+
 import getStripe from '../lib/stripe'
-
-
-let storedBags;
-let storedCloths;
-let storedNo;
 
 const Cart = ({bagsData, clothsData}) => {
     useEffect(() => {
@@ -30,47 +24,26 @@ const Cart = ({bagsData, clothsData}) => {
     }, [])
 
     const { cartBagItems, cartClothItems, removeCartItem } = useGlobalContext();
-    const { isUserLoggedin, loginConfirmation } = useAuthContext();
+    const { isUserLoggedin } = useAuthContext();
     const [items, setItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0)
-
-    loginConfirmation()
-
-    const cartAddNotice = (quantity, product_name) => toast.success(
-        `${quantity + 1} ${product_name} in cart`
-    );
-
-    const cartDeductNotice = (product_name) => toast.success(
-        `1 ${product_name} removed to cart`
-        );
-
-    const cartRemoveNotice = (product_name) => toast.info(
-        `all ${product_name} item(s) removed from cart`
-    );
-
     
     useEffect(() => {
-        let filteredBags = [];
-        let filteredCloths = [];
-        if(bagsData) {
-            filteredBags = bagsData.data.filter((bag => {
-                let item = '';
-                (storedBags).forEach(cartItem => {
-                    if(cartItem.id === bag.id) item = cartItem.id
-                });
-                return bag.id === item;
-            }));
-        };
+        let filteredBags = bagsData.data.filter(bag => {
+            let item;
+            cartBagItems.forEach(cartItem => {
+                if(cartItem.id === bag.id) item = cartItem.id
+            })
+            return bag.id === item
+        });
 
-        if(clothsData || storedCloths) {
-            filteredCloths = clothsData.data.filter((cloth => {
-                let item = '';
-                storedCloths.forEach(cartItem => {
-                    if(cartItem.id === cloth.id) item = cartItem.id
-                });
-                return cloth.id === item;
-            }))
-        };
+        let filteredCloths = clothsData.data.filter(cloth => {
+            let item;
+            cartClothItems.forEach(cartItem => {
+                if(cartItem.id === cloth.id) item = cartItem.id
+            })
+            return cloth.id === item
+        });
 
         filteredBags = filteredBags.map(bag => {
             return {...bag, quantity: 1};
@@ -108,7 +81,9 @@ const Cart = ({bagsData, clothsData}) => {
             };
         });
         setItems(newItems);
-        cartAddNotice(quantity, product_name)
+        toast.success(
+            `${+quantity + 1} ${product_name} in cart`
+        );        
     };
     
     const deductQuantity = (product_name, slug, quantity, product_price, category) => {
@@ -132,7 +107,9 @@ const Cart = ({bagsData, clothsData}) => {
                 };
             });
             setItems(newItems);
-            cartDeductNotice(product_name)
+            toast.success(
+                `1 ${product_name} removed to cart`
+            );
         }
     };
 
@@ -140,7 +117,9 @@ const Cart = ({bagsData, clothsData}) => {
         const newItems = items.filter(item => item.attributes.slug !== slug);
         setItems(newItems);
         removeCartItem(category, id, slug)
-        cartRemoveNotice(product_name)
+        toast.info(
+            `all ${product_name} item(s) removed from cart`
+        );
     };
     
     const handleBuy = async()=>{
@@ -159,16 +138,14 @@ const Cart = ({bagsData, clothsData}) => {
     }
 
     if(!isUserLoggedin) {
-        toast.loading('please wait for your cart items or login if you have not', {toastId: 'loading2'})
+        toast.loading('please wait for your cart items or login if you have not', {toastId: 'loading2', closeOnClick: true, autoClose: 5000,})
         return (
             <section className='h-28'>
-
             </section>
         )
     }
 
     if(isUserLoggedin) { 
-        toast.dismiss()
         return (
             <>
             <section className='text-deepBlue mx-5 md:mx-20 lg:mx-28 flex flex-col items-center relative'>

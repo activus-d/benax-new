@@ -20,13 +20,13 @@ export default function Layout({children}) {
     }, [])
 
     const contextClass = {
-    success: "bg-deepBlue text-veryLightGrey",
-    error: "bg-red-600",
-    info: "bg-red-500",
-    warning: "bg-orange-400",
-    default: "bg-deepBlue",
-    dark: "bg-white-600 font-gray-300",
-};
+        success: "bg-deepBlue text-veryLightGrey",
+        error: "bg-red-600",
+        info: "bg-red-500",
+        warning: "bg-orange-400",
+        default: "bg-deepBlue",
+        dark: "bg-white-600 font-gray-300",
+    };
 
     if(!isDomLoaded) {
         return <main className='bg-veryDeepBlue h-screen w-screen flex justify-center items-center'>
@@ -59,6 +59,7 @@ export default function Layout({children}) {
                     position="top-center"
                     autoClose={2000}
                     hideProgressBar={true}
+                    closeOnClick
                     newestOnTop={false}
                     rtl={false}
                     pauseOnFocusLoss
