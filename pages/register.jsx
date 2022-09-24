@@ -49,7 +49,7 @@ export default function Register() {
                     className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
                     type="text"
                     name='identifier'
-                    autocomplete="off"
+                    autoComplete="off"
                     required
                     value={userDetails.name}
                     onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.target.value})}
@@ -59,7 +59,7 @@ export default function Register() {
                     className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
                     name='email'
                     type='email'
-                    autocomplete="off"
+                    autoComplete="off"
                     required
                     value={userDetails.email}
                     onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.target.value})}
@@ -70,7 +70,7 @@ export default function Register() {
                     name='password'
                     minLength="8" 
                     required
-                    autocomplete="off"
+                    autoComplete="off"
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                     type='password'
