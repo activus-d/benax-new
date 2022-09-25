@@ -76,9 +76,7 @@ export default function TopNav() {
                             <BsSearch />
                         </button>
                     </li> */}
-                    <li className=' relative mr-7'
-                        onClick={() => toast('loading...', {toastId: "topNav1"})}
-                    >
+                    <li className=' relative mr-7'>
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
                                 <BsCart className='text-[32px]' />

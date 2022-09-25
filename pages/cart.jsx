@@ -210,7 +210,7 @@ const Cart = ({bagsData, clothsData}) => {
                     </div>
                 </div>
                 <button
-                    className='block mx-auto mt-1 mb-5 w-72 py-3 bg-green-500 font-medium text-white text-2xl rounded-md'
+                    className='block mx-auto mt-1 mb-5 w-72 py-3 bg-green-500 text-white text-xl rounded-md'
                         onClick={handleBuy}
                     >
                         Pay

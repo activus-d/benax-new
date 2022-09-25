@@ -43,7 +43,7 @@ export default function Login() {
                 <h2 className='font-medium mb-3 mt-2 text-center'>LOGIN WITH YOUR REGISTERED DETAILS</h2>
                 <form 
                     onSubmit={handleSubmit}
-                    className='flex flex-col items-center justify-center w-72 bg-veryLightGrey py-4 rounded sm:w-96 sm:px-4 md:w-[550px]'
+                    className='flex flex-col items-center justify-center w-72 bg-veryLightGrey py-4 rounded sm:w-full sm:px-4 md:w-[550px]'
                 >
                     <input 
                         className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'

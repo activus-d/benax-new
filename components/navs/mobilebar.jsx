@@ -68,9 +68,7 @@ export default function MobileBar() {
                         onClick={() => toast('loading...', {toastId: "mobile1"})}
                     >
                         <Link href='/cart'>
-                            <a className='flex justify-center items-center'
-                                onClick={() => toast('loading...', {toastId: "mobile2"})}
-                            >
+                            <a className='flex justify-center items-center'>
                                 <BsCart className='text-[2.2rem]' />
                                 <span className='absolute top-[2px] text-red-500 font-bold'>{isUserLoggedin ? cartItemsNo : 0}</span>
                             </a>

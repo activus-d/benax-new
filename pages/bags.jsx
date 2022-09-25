@@ -121,6 +121,13 @@ const BagList = ({bags}) => {
                     </Link>
                 </div>
             } */}
+            {isUserLoggedin && 
+                <button
+                className='block mx-auto mt-10 mb-2 w-72 py-3 bg-green-500 text-white text-xl rounded-md'
+                    onClick={() => Router.push('/cart')}
+                >
+                    Confirm Order
+                </button>}
         </section>
     )
 }
