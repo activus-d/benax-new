@@ -64,11 +64,11 @@ const ClothList = ({cloths}) => {
                     const {product_name, product_image, product_price, slug, category} = attributes;
                     const {data} = product_image
                     const {formats} = data.attributes
-                    const {large, medium, small} = formats
+                    const {small} = formats
                     return (
                         <div key={id} className="align-self-center justify-self-center relative mb-7 sm:mb-0">
                             <img 
-                            src={'http://localhost:1337' + small.url}
+                            src={small.url}
                                 className='sm:h-60 sm:w-60 md:h-80 md:w-80'
                             />
                             <p>{product_name}</p>
