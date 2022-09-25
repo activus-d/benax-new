@@ -1,10 +1,10 @@
-import Categories from './categories'
-import TopSection from './topSection'
-import NewProduct from './newProducts'
-import TwoItemsSection from './twoItemsSection'
-import Studio from './studio'
-import BookAppointment from './bookAppointment'
-import JoinUs from './joinUs'
+import Categories from './categories';
+import TopSection from './topSection';
+import NewProduct from './newProducts';
+import TwoItemsSection from './twoItemsSection';
+import Studio from './studio';
+import BookAppointment from './bookAppointment';
+import JoinUs from './joinUs';
 
 const HomePage = () => {
 

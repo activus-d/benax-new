@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { toast } from 'react-toastify'
-import Link from 'next/link'
-import { BsCart } from 'react-icons/bs'
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import Link from 'next/link';
+import { BsCart } from 'react-icons/bs';
 
-import { useGlobalContext } from '../globalContext'
-import { useAuthContext } from '../../lib/authContext'
-import { unsetToken } from '../../lib/auth'
+import { useGlobalContext } from '../globalContext';
+import { useAuthContext } from '../../lib/authContext';
+import { unsetToken } from '../../lib/auth';
 
 export default function TopNav() {
-    const { cartItemsNo, user } = useGlobalContext()
-    const [navCartDisplay, setNavCartDisplay] = useState(0)
-    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext()
+    const { cartItemsNo, user } = useGlobalContext();
+    const [navCartDisplay, setNavCartDisplay] = useState(0);
+    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext();
 
     const handleLogout = (e) => {
         e.preventDefault()
         unsetToken()
         isUserLoggedinToFalse()
-    }
+    };
 
     useEffect(() => {
         if(isUserLoggedin) {
@@ -24,7 +24,7 @@ export default function TopNav() {
         }else {
             setNavCartDisplay(0)
         }
-    }, [isUserLoggedin])
+    }, [isUserLoggedin]);
 
     if(isUserLoggedin) {
         return (
@@ -77,7 +77,7 @@ export default function TopNav() {
                         </button>
                     </li> */}
                     <li className=' relative mr-7'
-                        onClick={() => toast('loading...')}
+                        onClick={() => toast('loading...', {toastId: "topNav1"})}
                     >
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
@@ -88,7 +88,7 @@ export default function TopNav() {
                     </li>
                     <li className=' hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>
                         <a
-                            onClick={handleLogout}
+                            onClick={(e) => handleLogout(e)}
                         >
                             LOGOUT {user}
                         </a>

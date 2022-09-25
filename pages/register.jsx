@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import Router from 'next/router'
+import { useState } from 'react';
+import Router from 'next/router';
 
-import { useAuthContext } from '../lib/authContext'
-import { fetcher } from '../lib/api'
-import { setToken } from '../lib/auth'
-import Link from 'next/link'
+import { useAuthContext } from '../lib/authContext';
+import { fetcher } from '../lib/api';
+import { setToken } from '../lib/auth';
+import Link from 'next/link';
 
 export default function Register() {
-    const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''})
-    const [isUserInvalid, setIsUserInvalid] = useState(false)
-    const { isLoggedinToTrue } = useAuthContext()
+    const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''});
+    const [isUserInvalid, setIsUserInvalid] = useState(false);
+    const { isLoggedinToTrue } = useAuthContext();
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,7 +92,7 @@ export default function Register() {
             </form>
         </section>
     )
-  }
+  };
 
     if(isUserInvalid) {
         return (
@@ -119,5 +119,5 @@ export default function Register() {
 
             </section>
         )
-    }
+    };
 }

@@ -8,7 +8,7 @@ import { useAuthContext } from '../lib/authContext';
 import { useGlobalContext } from "../components/globalContext";
 import { fetcher } from '../lib/api';
 
-import getStripe from '../lib/stripe'
+import getStripe from '../lib/stripe';
 
 
 const Cart = ({bagsData, clothsData}) => {
@@ -31,7 +31,7 @@ const Cart = ({bagsData, clothsData}) => {
     const { cartBagItems, cartClothItems, removeCartItem } = useGlobalContext();
     const { isUserLoggedin } = useAuthContext();
     const [items, setItems] = useState([]);
-    const [totalCost, setTotalCost] = useState(0)
+    const [totalCost, setTotalCost] = useState(0);
     
     useEffect(() => {
         let filteredBags = bagsData.data.filter(bag => {
@@ -138,17 +138,17 @@ const Cart = ({bagsData, clothsData}) => {
         })
         if(res.statusCode === 500) return
         const data = await res.json()
-        toast.loading('Redirecting...', {toastId: 'loading1'})
+        toast('Redirecting...', {toastId: 'cart1'})
         stripe.redirectToCheckout({sessionId: data.id})
-    }
+    };
 
     if(!isUserLoggedin) {
-        toast.loading('please wait for your cart items or login if you have not', {toastId: 'loading2', closeOnClick: true, autoClose: 5000,})
+        toast('please login', {toastId: 'cart2', closeOnClick: true, autoClose: 5000,})
         return (
-            <section className='h-28'>
+            <section className='h-12'>
             </section>
         )
-    }
+    };
 
     if(isUserLoggedin) { 
         return (
@@ -218,7 +218,7 @@ const Cart = ({bagsData, clothsData}) => {
             </section>
             </>
         )
-    }
+    };
 }
 
 export async function getStaticProps() {

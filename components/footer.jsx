@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import { MdDoubleArrow } from 'react-icons/md'
-import { FaInstagramSquare } from 'react-icons/fa'
-import { ImFacebook2 } from 'react-icons/im'
-import { FaTwitterSquare } from 'react-icons/fa'
+import { MdDoubleArrow } from 'react-icons/md';
+import { FaInstagramSquare } from 'react-icons/fa';
+import { ImFacebook2 } from 'react-icons/im';
+import { FaTwitterSquare } from 'react-icons/fa';
 
 export default function Footer() {
     return (

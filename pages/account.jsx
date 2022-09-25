@@ -1,8 +1,8 @@
 import { useGlobalContext } from "../components/globalContext";
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Account() {
-    const { user, logoutUser } = useGlobalContext()
+    const { user, logoutUser } = useGlobalContext();
 
     if(!user) {
         return (

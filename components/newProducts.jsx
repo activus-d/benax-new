@@ -1,17 +1,17 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 
-import { products } from './data'
+import { products } from './data';
 
 export default function NewProduct() {
-    const [jackets, setJackets] = useState(products[0])
-    const product1 = jackets.items[0]
-    const product2 = jackets.items[1]
-    const product3 = jackets.items[2]
+    const [jackets, setJackets] = useState(products[0]);
+    const product1 = jackets.items[0];
+    const product2 = jackets.items[1];
+    const product3 = jackets.items[2];
 
     const trial = (e) => {
         const category = products.filter(product => product.category === e.currentTarget.dataset.category)
         console.log(category)
-    }
+    };
 
     return (
         <section className='px-5 w-full md:px-14 text-deepBlue py-5'>

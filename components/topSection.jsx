@@ -1,12 +1,12 @@
-import React, {useRef, useEffect, useState, Children} from 'react'
-import Link from 'next/link'
+import React, {useRef, useEffect, useState, Children} from 'react';
+import Link from 'next/link';
 
-import {BsArrowDown} from 'react-icons/bs'
+import {BsArrowDown} from 'react-icons/bs';
 
 export default function TopSection() {
-    const [slideIndex, setSlideIndex] = useState(0)
-    const mySlides = useRef(null)
-    const myDots = useRef(null)
+    const [slideIndex, setSlideIndex] = useState(0);
+    const mySlides = useRef(null);
+    const myDots = useRef(null);
     
     useEffect(() => {
         const interval = setInterval(() => {
@@ -31,7 +31,7 @@ export default function TopSection() {
         return () => {
             clearInterval(interval)
         }
-    }, [mySlides, slideIndex] )
+    }, [mySlides, slideIndex] );
     
 
     return (

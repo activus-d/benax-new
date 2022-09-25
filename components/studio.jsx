@@ -1,14 +1,14 @@
-import React, {useState, useRef, useEffect} from 'react'
-import { RiArrowLeftCircleFill } from 'react-icons/ri'
-import { RiArrowRightCircleFill } from 'react-icons/ri'
-import { studioPhotos } from './data'
+import React, {useState, useRef, useEffect} from 'react';
+import { RiArrowLeftCircleFill } from 'react-icons/ri';
+import { RiArrowRightCircleFill } from 'react-icons/ri';
+import { studioPhotos } from './data';
 
 export default function Studio({title}) {
-    const [photos, setPhotos] = useState([studioPhotos[0]])
-    const [isNext, setIsNext] = useState(true)
-    const [isPrev, setIsPrev] = useState(false)
-    const mySlides = useRef(null)
-    const docSlide = useRef(null)
+    const [photos, setPhotos] = useState([studioPhotos[0]]);
+    const [isNext, setIsNext] = useState(true);
+    const [isPrev, setIsPrev] = useState(false);
+    const mySlides = useRef(null);
+    const docSlide = useRef(null);
 
     const handlePrev = () => {
         const id = mySlides.current.dataset.id
@@ -42,14 +42,6 @@ export default function Studio({title}) {
             } 
         }
     };
-
-    let touchstartX = 0
-    let touchendX = 0
-    
-    function checkDirection() {
-      if (touchendX < touchstartX) alert('swiped left!')
-      if (touchendX > touchstartX) alert('swiped right!')
-    }
 
 
     return (

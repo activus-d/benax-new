@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import useSWR from 'swr'
+import React, { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { toast } from 'react-toastify';
-import Router from 'next/router'
+import Router from 'next/router';
 
-import { GiReturnArrow } from 'react-icons/gi'
+import { GiReturnArrow } from 'react-icons/gi';
 
-import { fetcher } from "../lib/api"
-import { useGlobalContext } from "../components/globalContext"
-import { useAuthContext } from "../lib/authContext"
+import { fetcher } from "../lib/api";
+import { useGlobalContext } from "../components/globalContext";
+import { useAuthContext } from "../lib/authContext";
 
 /**
  * bagsData
@@ -16,8 +16,8 @@ import { useAuthContext } from "../lib/authContext"
  */
 export let bagsData;
 const BagList = ({bags}) => {
-    const { isUserLoggedin } = useAuthContext()
-    const { addToCart } = useGlobalContext()
+    const { isUserLoggedin } = useAuthContext();
+    const { addToCart } = useGlobalContext();
 
     /**
      * useSWR 
@@ -31,7 +31,7 @@ const BagList = ({bags}) => {
         {
             fallbackData: bags 
         }
-    )
+    );
 
     const addNotice = (product_name) => toast.success(
         `${product_name} added to cart`
@@ -45,7 +45,7 @@ const BagList = ({bags}) => {
         }else {
             Router.push('/login')
         }
-    }
+    };
 
     return (
         <section className="text-deepBlue mb-7 px-5 md:px-14" style={{zIndex: '0'}}>
