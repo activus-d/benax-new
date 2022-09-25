@@ -105,16 +105,16 @@ export default function MobileBar() {
                             </span>
                         </Link>
                     </li>
-                    <li className='h-10 flex items-center px-5'>
+                    {/* <li className='h-10 flex items-center px-5'>
                         <span className='hover:border-b-2 hover:border-black hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
                             ABOUT
                         </span>
-                    </li>
+                    </li> */}
                     <li className='h-10 flex items-center px-5'>
                         <button
                             onClick={(e) => handleLogout(e)}
                         >
-                            Logout
+                            LOGOUT
                         </button>
                     </li>
                 </ul>
@@ -168,16 +168,23 @@ export default function MobileBar() {
                             </span>
                         </Link>
                     </li>
-                    <li className='h-10 flex items-center px-5'>
+                    {/* <li className='h-10 flex items-center px-5'>
                         <span className='hover:border-b-2 hover:border-black hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
                             ABOUT
                         </span>
-                    </li>
+                    </li> */}
                     <li className='h-10 flex items-center px-5'>
                         <button
                             onClick={() => Router.push('/login')}
                         >
-                            Login
+                            LOGIN
+                        </button>
+                    </li>
+                    <li className='h-10 flex items-center px-5'>
+                        <button
+                            onClick={() => Router.push('/register')}
+                        >
+                            REGISTER
                         </button>
                     </li>
                 </ul>
