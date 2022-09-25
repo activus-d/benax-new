@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { BsCart } from 'react-icons/bs'
+import { toast } from 'react-toastify'
 import Link from 'next/link'
+import { BsCart } from 'react-icons/bs'
+
 import { useGlobalContext } from '../globalContext'
 import { useAuthContext } from '../../lib/authContext'
 import { unsetToken } from '../../lib/auth'
@@ -74,7 +76,9 @@ export default function TopNav() {
                             <BsSearch />
                         </button>
                     </li> */}
-                    <li className=' relative mr-7'>
+                    <li className=' relative mr-7'
+                        onClick={() => toast('loading...')}
+                    >
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
                                 <BsCart className='text-[32px]' />

@@ -1,19 +1,22 @@
 import React, { useRef, useState, useEffect } from 'react'
+import Link from 'next/link'
+import Router from 'next/router'
+import { toast } from 'react-toastify';
+
 import {IoIosMenu} from 'react-icons/io'
 import {IoIosClose} from 'react-icons/io'
 import { BsCart } from 'react-icons/bs'
-import Link from 'next/link'
+
 import { useGlobalContext } from '../globalContext'
 import { useAuthContext } from '../../lib/authContext'
 import { unsetToken } from '../../lib/auth'
-import Router from 'next/router'
 
 export default function MobileBar() {
     const [isMobileNavHeight, setIsMobileNavHeight] = useState(false);
     const ulRef = useRef(null)
     const { cartItemsNo, user } = useGlobalContext()
     const [navCartDisplay, setNavCartDisplay] = useState(0)
-    const { useFetchUser, isUserLoggedin, isUserLoggedinToFalse, logoutUser } = useAuthContext()
+    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext()
 
     const handleNav = () => {
         const element = ulRef.current
@@ -60,9 +63,13 @@ export default function MobileBar() {
                     <Link href="/">
                         <span className='font-logo'>BENAX COLLECTION</span>
                     </Link>
-                    <div className=' relative flex justify-center items-center px-3'>
+                    <div className=' relative flex justify-center items-center px-3'
+                        onClick={() => toast('loading...')}
+                    >
                         <Link href='/cart'>
-                            <a className='flex justify-center items-center'>
+                            <a className='flex justify-center items-center'
+                                onClick={() => toast('loading...')}
+                            >
                                 <BsCart className='text-[2.2rem]' />
                                 <span className='absolute top-[2px] text-red-500 font-bold'>{navCartDisplay}</span>
                             </a>

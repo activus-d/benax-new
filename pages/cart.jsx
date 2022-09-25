@@ -10,7 +10,12 @@ import { fetcher } from '../lib/api';
 
 import getStripe from '../lib/stripe'
 
+
 const Cart = ({bagsData, clothsData}) => {
+    let storedBags;
+    let storedCloths;
+    let storedNo;
+    
     useEffect(() => {
         if(localStorage.getItem('storedBagDataCart') !== null) {
             storedBags = JSON.parse(localStorage.getItem('storedBagDataCart') )
@@ -155,11 +160,11 @@ const Cart = ({bagsData, clothsData}) => {
                     const {product_name, product_image, product_price, slug, category} = attributes;
                     const {data} = product_image
                     const {formats} = data.attributes
-                    const {large, medium, small} = formats
+                    const { small} = formats
                     return (
                         <div key={slug} className='grid grid-cols-2 justify-between mb-7 bg-veryLightGrey   w-full'>
                             <img 
-                                src={'http://localhost:1337' + small.url}
+                                src={small.url}
                                 className='h-52 w-52'
                             />
                             <div className='flex flex-col gap-y-2 self-center justify-self-end mx-5 max-w-[135px]'>
@@ -205,7 +210,7 @@ const Cart = ({bagsData, clothsData}) => {
                     </div>
                 </div>
                 <button
-                    className='block mx-auto mt-1 mb-5 w-72 py-3 bg-green-500 text-veryLightGrey    rounded-md'
+                    className='block mx-auto mt-1 mb-5 w-72 py-3 bg-green-500 font-medium text-white text-2xl rounded-md'
                         onClick={handleBuy}
                     >
                         Pay
