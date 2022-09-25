@@ -154,9 +154,14 @@ export default function TopNav() {
                             </a>
                         </Link>
                     </li>
-                    <li className=' hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>
+                    <li className=' hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center mr-6'>
                         <Link href='/login'>
-                            <a>REGISTER / LOGIN</a>
+                            <a>LOGIN</a>
+                        </Link>
+                    </li>
+                    <li className=' hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>
+                        <Link href='/register'>
+                            <a>REGISTER</a>
                         </Link>
                     </li>
                 </ul>

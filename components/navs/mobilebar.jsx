@@ -114,7 +114,7 @@ export default function MobileBar() {
                         <button
                             onClick={(e) => handleLogout(e)}
                         >
-                            Logout
+                            LOGOUT
                         </button>
                     </li>
                 </ul>
@@ -177,7 +177,14 @@ export default function MobileBar() {
                         <button
                             onClick={() => Router.push('/login')}
                         >
-                            Login
+                            LOGIN
+                        </button>
+                    </li>
+                    <li className='h-10 flex items-center px-5'>
+                        <button
+                            onClick={() => Router.push('/register')}
+                        >
+                            REGISTER
                         </button>
                     </li>
                 </ul>

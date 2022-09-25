@@ -51,10 +51,11 @@ const ClothList = ({cloths}) => {
         <section className="text-deepBlue mb-7 px-5 md:px-14">
             <div className='mb-5 relative'>
                 <button 
-                    className='flex justify-center items-center bg-deepBlue text-veryLightGrey  rounded-md h-8 w-14 absolute left-0'
+                    className='flex justify-center items-center bg-deepBlue text-veryLightGrey rounded-md h-8 w-20 absolute left-0'
                     onClick={() => Router.push('/categories')}
                 >
                     <GiReturnArrow />
+                    <span className='text-[8px]'>categories</span>
                 </button>
                 <h2 className="text-center text-3xl">CLOTHING</h2>
             </div>

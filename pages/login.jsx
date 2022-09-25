@@ -10,6 +10,9 @@ export default function Login() {
     const [isResponseData, setIsResponsedata] = useState(false);
     const [isUserInvalid, setIsUserInvalid] = useState(false);
     const { isUserLoggedinToTrue, setCurrentUser } = useAuthContext();
+    const [passwordMessage, setPasswordMessage] = useState("password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters");
+    const [passwordType, setPasswordType] = useState("password");
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -37,13 +40,21 @@ export default function Login() {
         }
     };
 
+    const showPassword = (e) => {
+        if(e.currentTarget.checked) {
+            setPasswordType("text")
+        }else {
+            setPasswordType("password")
+        }
+    };
+
     if(!isUserInvalid) {
         return (
             <section className='flex flex-col items-center mb-10'>
                 <h2 className='font-medium mb-3 mt-2 text-center'>LOGIN WITH YOUR REGISTERED DETAILS</h2>
                 <form 
                     onSubmit={handleSubmit}
-                    className='flex flex-col items-center justify-center bg-veryLightGrey py-4 rounded w-full sm:w-96 sm:px-4 md:w-[550px]'
+                    className='flex flex-col items-center justify-center bg-veryLightGrey py-4 px-4 rounded w-full sm:w-96 sm:px-4 md:w-[550px]'
                 >
                     <input 
                         className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
@@ -73,17 +84,27 @@ export default function Login() {
                         autoComplete="off"
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                         title="Must contain at least one number and one uppercase and   lowercase letter, and at least 8 or more characters"
-                        type='password'
+                        type={passwordType}
                         value={userDetails.password}
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter a valid password'
                     />
+                    <div className='w-full flex items-center mb-7 text-deepBlue'>
+                    <input 
+                        type='checkbox'
+                        name='showPassword'
+                        className='mr-3 bg-white opacity-100'
+                        onClick={(e) => showPassword(e)}
+                    />
+                        <span>show password</span>
+                    </div>
                     <button 
                         type='submit'
                         className='bg-deepBlue text-veryLightGrey w-56 py-1 rounded-md  xl:hover:scale-110'
                     >
                         Login
                     </button>
+                    <p className='px-4 text-red-500 mt-2'>{passwordMessage}</p>
                     <Link href='/register'>
                         <a className='mt-3 hover:border-b hover:border-deepBlue '>
                             click here to register instead
@@ -108,6 +129,7 @@ export default function Login() {
                     >
                         Login
                     </button>
+                    
                     <button 
                         type='submit'
                         className='bg-deepBlue text-veryLightGrey w-28 py-1 rounded-md xl:hover:scale-110 mx-3'
