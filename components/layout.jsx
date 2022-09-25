@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import Head from 'next/head'
+import React, {useEffect, useState} from 'react';
+import Head from 'next/head';
 
-import MobileBar from './navs/mobilebar'
-import TopNav from './navs/topNav'
-import Footer from './footer'
+import MobileBar from './navs/mobilebar';
+import TopNav from './navs/topNav';
+import Footer from './footer';
 
 export default function Layout({children}) {
-    const [isDomLoaded, setIsDomLoaded] = useState(false)
+    const [isDomLoaded, setIsDomLoaded] = useState(false);
     
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -15,13 +15,13 @@ export default function Layout({children}) {
         return () => {
             clearTimeout(timeout)
         }
-    }, [])
+    }, []);
 
     if(!isDomLoaded) {
         return <main className='bg-veryDeepBlue h-screen w-screen flex justify-center items-center'>
             <img src="assets/loading.gif" className='w-36 h-36' />
         </main>
-    }
+    };
 
     if(isDomLoaded)  {
         return (
@@ -43,5 +43,5 @@ export default function Layout({children}) {
                 </footer>
             </>
         )
-    }
+    };
 }

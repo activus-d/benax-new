@@ -1,12 +1,12 @@
-import { fetcher } from "../lib/api"
-import useSWR from 'swr'
+import { fetcher } from "../lib/api";
+import useSWR from 'swr';
 import { toast } from 'react-toastify';
-import Router from 'next/router'
+import Router from 'next/router';
 
-import { GiReturnArrow } from 'react-icons/gi'
+import { GiReturnArrow } from 'react-icons/gi';
 
-import { useGlobalContext } from "../components/globalContext"
-import { useAuthContext } from "../lib/authContext"
+import { useGlobalContext } from "../components/globalContext";
+import { useAuthContext } from "../lib/authContext";
 
 /**
  * clothsData
@@ -15,9 +15,9 @@ import { useAuthContext } from "../lib/authContext"
  */
 export let clothsData;
 const ClothList = ({cloths}) => {
-    const { addToCart } = useGlobalContext()
+    const { addToCart } = useGlobalContext();
 
-    const { isUserLoggedin } = useAuthContext()
+    const { isUserLoggedin } = useAuthContext();
 
     /**
      * useSWR 
@@ -31,7 +31,7 @@ const ClothList = ({cloths}) => {
         {
             fallbackData: cloths 
         }
-    )
+    );
 
     const addNotice = (product_name) => toast.success(
         `${product_name} added to cart`
@@ -45,7 +45,7 @@ const ClothList = ({cloths}) => {
         }else {
             Router.push('/login')
         }
-    }
+    };
 
     return (
         <section className="text-deepBlue mb-7 px-5 md:px-14">
@@ -93,6 +93,13 @@ const ClothList = ({cloths}) => {
                     
                 })}
             </div>
+            {isUserLoggedin && 
+                <button
+                    className='block mx-auto mt-10 mb-2 w-72 py-3 bg-green-500 text-white text-xl rounded-md'
+                        onClick={() => Router.push('/cart')}
+                    >
+                    Confirm Order
+                </button>}
         </section>
     )
 }

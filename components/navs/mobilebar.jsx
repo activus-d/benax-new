@@ -1,22 +1,22 @@
-import React, { useRef, useState, useEffect } from 'react'
-import Link from 'next/link'
-import Router from 'next/router'
+import React, { useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
+import Router from 'next/router';
 import { toast } from 'react-toastify';
 
-import {IoIosMenu} from 'react-icons/io'
-import {IoIosClose} from 'react-icons/io'
-import { BsCart } from 'react-icons/bs'
+import {IoIosMenu} from 'react-icons/io';
+import {IoIosClose} from 'react-icons/io';
+import { BsCart } from 'react-icons/bs';
 
-import { useGlobalContext } from '../globalContext'
-import { useAuthContext } from '../../lib/authContext'
-import { unsetToken } from '../../lib/auth'
+import { useGlobalContext } from '../globalContext';
+import { useAuthContext } from '../../lib/authContext';
+import { unsetToken } from '../../lib/auth';
 
 export default function MobileBar() {
     const [isMobileNavHeight, setIsMobileNavHeight] = useState(false);
-    const ulRef = useRef(null)
-    const { cartItemsNo, user } = useGlobalContext()
-    const [navCartDisplay, setNavCartDisplay] = useState(0)
-    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext()
+    const ulRef = useRef(null);
+    const { cartItemsNo, user } = useGlobalContext();
+    const [navCartDisplay, setNavCartDisplay] = useState(0);
+    const { isUserLoggedin, isUserLoggedinToFalse } = useAuthContext();
 
     const handleNav = () => {
         const element = ulRef.current
@@ -40,12 +40,13 @@ export default function MobileBar() {
             clearTimeout(timeout)
         }
         }, 8000)
-    }, [ulRef, isMobileNavHeight])
+    }, [ulRef, isMobileNavHeight]);
 
     const handleLogout = (e) => {
         e.preventDefault()
         unsetToken()
         isUserLoggedinToFalse()
+        Router.push('/')
     };
 
     useEffect(() => {
@@ -54,7 +55,7 @@ export default function MobileBar() {
         }else {
             setNavCartDisplay(0)
         }
-    }, [isUserLoggedin])
+    }, [isUserLoggedin]);
 
     if (isUserLoggedin) {
         return(
@@ -64,14 +65,12 @@ export default function MobileBar() {
                         <span className='font-logo'>BENAX COLLECTION</span>
                     </Link>
                     <div className=' relative flex justify-center items-center px-3'
-                        onClick={() => toast('loading...')}
+                        onClick={() => toast('loading...', {toastId: "mobile1"})}
                     >
                         <Link href='/cart'>
-                            <a className='flex justify-center items-center'
-                                onClick={() => toast('loading...')}
-                            >
+                            <a className='flex justify-center items-center'>
                                 <BsCart className='text-[2.2rem]' />
-                                <span className='absolute top-[2px] text-red-500 font-bold'>{navCartDisplay}</span>
+                                <span className='absolute top-[2px] text-red-500 font-bold'>{isUserLoggedin ? cartItemsNo : 0}</span>
                             </a>
                         </Link>
                     </div>
@@ -113,7 +112,7 @@ export default function MobileBar() {
                     </li>
                     <li className='h-10 flex items-center px-5'>
                         <button
-                            onClick={() => handleLogout}
+                            onClick={(e) => handleLogout(e)}
                         >
                             Logout
                         </button>
@@ -134,7 +133,7 @@ export default function MobileBar() {
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
                                 <BsCart className='text-[32px]' />
-                                <span className='absolute top-[1px] text-red-500 font-bold'>{cartItemsNo}</span>
+                                <span className='absolute top-[1px] text-red-500 font-bold'>{navCartDisplay}</span>
                             </a>
                         </Link>
                     </div>

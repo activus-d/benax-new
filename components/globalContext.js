@@ -21,11 +21,12 @@ const GlobalProvider = ({ children }) => {
       if(localStorage.getItem('storedClothDataCart') !== null) {
         setClothCartItems(JSON.parse(localStorage.getItem('storedClothDataCart')))
       };
-    }, [])
+    }, []);
     
     const addCartItem = () => {
         setCartItemsNo(cartItemsNo + 1)
     };
+
     const removeCartItem = (category, id, slug) => {
       let newBagItems;
       let newClothItems;
@@ -45,6 +46,7 @@ const GlobalProvider = ({ children }) => {
       storedCartItemsNo = cartItemsNo - 1
       localStorage.setItem('storedCartNo', storedCartItemsNo)
     };
+    
     const addToCart = (item) => {
         if(item.category === 'bag') {
           if(cartBagItems.every(cartItem => cartItem.id !== item.id)) {

@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { useAuthContext } from '../lib/authContext'
-import { fetcher } from '../lib/api'
-import { setToken} from '../lib/auth'
-import Link from 'next/link'
-import Router from 'next/router'
+import { useState } from 'react';
+import { useAuthContext } from '../lib/authContext';
+import { fetcher } from '../lib/api';
+import { setToken} from '../lib/auth';
+import Link from 'next/link';
+import Router from 'next/router';
 
 export default function Login() {
-    const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''})
-    const [isResponseData, setIsResponsedata] = useState(false)
-    const [isUserInvalid, setIsUserInvalid] = useState(false)
-    const { isUserLoggedinToTrue, setCurrentUser } = useAuthContext()
+    const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''});
+    const [isResponseData, setIsResponsedata] = useState(false);
+    const [isUserInvalid, setIsUserInvalid] = useState(false);
+    const { isUserLoggedinToTrue, setCurrentUser } = useAuthContext();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -43,7 +43,7 @@ export default function Login() {
                 <h2 className='font-medium mb-3 mt-2 text-center'>LOGIN WITH YOUR REGISTERED DETAILS</h2>
                 <form 
                     onSubmit={handleSubmit}
-                    className='flex flex-col items-center justify-center w-72 bg-veryLightGrey py-4 rounded sm:w-96 sm:px-4 md:w-[550px]'
+                    className='flex flex-col items-center justify-center w-72 bg-veryLightGrey py-4 rounded sm:w-full sm:px-4 md:w-[550px]'
                 >
                     <input 
                         className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
@@ -92,7 +92,7 @@ export default function Login() {
                 </form>
             </section>
         )
-    }
+    };
     
     if(isUserInvalid) {
         return (
@@ -119,5 +119,5 @@ export default function Login() {
 
             </section>
         )
-    }
+    };
 }

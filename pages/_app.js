@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }) {
     error: "bg-red-600",
     info: "bg-red-500 w-72",
     warning: "bg-orange-400 w-72",
-    default: "bg-deepBlue w-72",
+    default: "bg-deepBlue w-72 text-center mx-auto",
     dark: "bg-white-600 font-gray-300 w-72",
   };
 

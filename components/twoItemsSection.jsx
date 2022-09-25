@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
-import { products } from './data'
+import React, {useState} from 'react';
+import { products } from './data';
 
 export default function TwoItemsSection() {
-    const [bags, setBags] = useState(products[1])
-    const product1 = bags.items[0]
-    const product2 = bags.items[1]
+    const [bags, setBags] = useState(products[1]);
+    const product1 = bags.items[0];
+    const product2 = bags.items[1];
 
     return (
         <section className='hidden lg:grid grid-cols-2 pt-24 md:px-14 gap-x-5 basis-1/2'>
