@@ -6,36 +6,37 @@ import image19 from '../public/assets/image19.jpg';
 import image20 from '../public/assets/image20.jpg';
 import image21 from '../public/assets/image21.jpg';
 
-export default function JoinUs() {
+export default function BenaxCollection() {
     return (
-        <section className='mx-14 mt-14 text-deepBlue h-40 sm:h-auto md:hidden'>
-            <div className='flex justify-between items-center mb-5'>
-                <h3 className='text-2xl sm:text-4xl'>JOIN US</h3>
-                <p>@benaxCollection</p>
-            </div>
-            <div className='grid grid-cols-4 h-[200px] gap-x-5'>
-                <div >
+        <section className='hidden mx-14 mt-14 text-deepBlue h-40 lg:block'>
+            <p className='text-right mb-5'>@benaxCollection</p>
+            <div className='flex'>
+                <div className='mr-16'>
                     <Image 
                         src={image18}
-                        height={800}
+                        height={150}
+                        width={100}
                     />
                 </div>
-                <div className=''>
+                <div className='mr-16'>
                     <Image 
                         src={image19}
-                        height={600}
+                        height={100}
+                        width={100}
                     />
                 </div>
-                <div>
+                <div className='mr-16'>
                     <Image 
                         src={image20}
-                        height={800}
+                        height={150}
+                        width={100}
                     />
                 </div>
                 <div className=''>
                     <Image 
                         src={image21}
-                        height={600}
+                        height={100}
+                        width={100}
                     />
                 </div>
             </div>

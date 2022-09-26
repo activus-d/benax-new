@@ -22,7 +22,7 @@ export default async function handler(req, res) {
                   currency:'USD',
                   product_data:{
                     name: product_name,
-                    images: ['http://localhost:1337' + small.url],
+                    images: [small.url],
                   },
                   unit_amount: product_price * 100
                 },
