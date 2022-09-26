@@ -10,7 +10,7 @@ export default function Register() {
     const [userDetails, setUserDetails] = useState({username: '', email: '', password: '', verify: ''});
     const [isUserInvalid, setIsUserInvalid] = useState(false);
     const { isUserLoggedinToTrue} = useAuthContext();
-    const [usernameMessage, setUsernameMessage] = useState("");
+    const [userMessage, setUserMessage] = useState("");
     const [passwordType, setPasswordType] = useState("password");
     const passwordRef = useRef()
     const message = useRef(null)
@@ -85,6 +85,7 @@ export default function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if(userDetails.password !== userDetails.verify) {
+            setUserMessage('confirmation password is wrong')
             setUserDetails({...userDetails, password: '', verify: ''} )
             return
         }
@@ -138,7 +139,7 @@ export default function Register() {
                 className='flex flex-col items-center justify-center w-72 bg-veryLightGrey py-4 px-2 rounded sm:w-96 md:w-[550px]'
                 onSubmit={handleSubmit}
             >
-                <p className='px-4 text-red-500 mt-2'>{usernameMessage}</p>
+                <p className='px-4 text-red-500 mt-2'>{userMessage}</p>
                 <input 
                     className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
                     type="text"
@@ -149,12 +150,12 @@ export default function Register() {
                     onChange={(e) => {
                         setUserDetails({...userDetails, [e.target.name]: e.target.value})
                         if(e.target.value.length < 3) {
-                            setUsernameMessage(`username must be three words or more`)
+                            setUserMessage(`username must be three words or more`)
                         }else {
-                            setUsernameMessage('')
+                            setUserMessage('')
                         }
                     }}
-                    placeholder='Enter your name'
+                    placeholder='Enter your username'
                 />
                 <input 
                     className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
@@ -191,7 +192,7 @@ export default function Register() {
                     type={passwordType}
                     value={userDetails.verify}
                     onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.target.value})}
-                    placeholder='Enter a valid password'
+                    placeholder='Confirm password'
                 />
                 <div className='w-full flex items-center mb-4 text-deepBlue px-7'>
                     <input 
