@@ -9,7 +9,7 @@ export default function Categories() {
     };
 
     return (
-        <section className='pt-10 px-5 basis-1/2 font-semibold md:px-0 md:pl-14 md:mr-14' id='categories'>
+        <section className='pt-10 px-5 basis-1/2 font-semibold md:px-14 lg:pl-14 lg:pr-0' id='categories'>
             <h2 className='text-2xl mb-5 text-deepBlue font-normal sm:text-4xl'>CATEGORIES</h2>
             <ul>
                 {/* <li className='flex items-center justify-between h-14 border-t border-t-lightGrey hover:text-lightGrey cursor-pointer'>

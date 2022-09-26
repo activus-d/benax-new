@@ -22,36 +22,36 @@ export default function NewProduct() {
                         src={product1.src}
                         className='w-full h-full'
                     />
-                    <span>
+                    {/* <span>
                         {product1.product} 
                     </span>
                     <p>
                         {`$${product1.price}`} 
-                    </p>
+                    </p> */}
                 </div>
                 <div className='h-[400px] lg:h-[300px] lg:col-span-3' key={product2.id} data-category="jackets" onClick={trial}>
                     <img 
                         src={product2.src}
                         className='w-full h-full'
                     />
-                    <span>
+                    {/* <span>
                         {product2.product} 
                     </span>
                     <p>
                         {`$${product1.price}`} 
-                    </p>
+                    </p> */}
                 </div>
                 <div className='h-[400px] lg:col-span-3 lg:h-[300px] self-end' key={product3.id} data-category="jackets">
                     <img 
                         src={product3.src}
                         className='w-full h-full'
                     />
-                    <span>
+                    {/* <span>
                         {product3.product} 
                     </span>
                     <p>
                         {`$${product1.price}`} 
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </section>

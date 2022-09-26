@@ -127,7 +127,8 @@ const Cart = ({bagsData, clothsData}) => {
         );
     };
     
-    const handleBuy = async()=>{
+    const handleBuy = async ()=>{
+        console.log('a')
         const stripe = await getStripe()
         const res = await fetch('/api/stripe', {
             method: 'POST',
@@ -211,8 +212,9 @@ const Cart = ({bagsData, clothsData}) => {
                 </div>
                 <button
                     className='block mx-auto mt-1 mb-5 w-72 py-3 bg-green-500 text-white text-xl rounded-md'
-                        onClick={handleBuy}
-                    >
+                    onClick={(e) => handleBuy(e)}
+                    type="sumbit"
+                >
                         Pay
                 </button>
             </section>

@@ -35,6 +35,7 @@ export default function Login() {
             setIsResponsedata(true)
             Router.push('/')
         } else {
+            setUserDetails({identifier: '', email: '', password: ''})
             setIsUserInvalid(true)
             console.log(responseData)
         }
@@ -57,7 +58,7 @@ export default function Login() {
                     className='flex flex-col items-center justify-center bg-veryLightGrey py-4 px-4 rounded w-full sm:w-96 sm:px-4 md:w-[550px]'
                 >
                     <input 
-                        className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
+                        className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
                         type="text"
                         name='identifier'
                         required
@@ -77,7 +78,7 @@ export default function Login() {
                         placeholder='Enter your email'
                     /> */}
                     <input 
-                        className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
+                        className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
                         name='password'
                         minLength="8" 
                         required
@@ -89,7 +90,7 @@ export default function Login() {
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter a valid password'
                     />
-                    <div className='w-full flex items-center mb-7 text-deepBlue'>
+                    <div className='w-full flex items-center mb-4 text-deepBlue sm:w-86 md:w-[480px]'>
                     <input 
                         type='checkbox'
                         name='showPassword'
@@ -104,7 +105,7 @@ export default function Login() {
                     >
                         Login
                     </button>
-                    <p className='px-4 text-red-500 mt-2'>{passwordMessage}</p>
+                    <p className='px-4 text-red-500 mt-2 text-center'>{passwordMessage}</p>
                     <Link href='/register'>
                         <a className='mt-3 hover:border-b hover:border-deepBlue '>
                             click here to register instead
