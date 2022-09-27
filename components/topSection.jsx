@@ -45,12 +45,8 @@ export default function TopSection() {
                 </div>
                 <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">
                     <img 
-                        src="assets/newImage1.jpg"
-                        className="w-full h-full hidden md:block"
-                    />
-                    <img 
-                        src="assets/mobileTry.jpg"
-                        className="w-full h-full md:hidden"
+                        src="assets/image13.jpg"
+                        className="w-full h-full hidden"
                     />
                 </div>
                 <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">
@@ -59,17 +55,10 @@ export default function TopSection() {
                         className="w-full h-full"
                     />
                 </div>
-                <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">
-                    <img 
-                        src="assets/image15.jpg"
-                        className="w-full h-full"
-                    />
-                </div>
             </div>
             <div className='slideDots absolute bottom-5 flex' ref={myDots}>
                 <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div> 
                 <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div> 
-                <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div>
                 <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div>
             </div>
            <div className='absolute top-[150px]'>
