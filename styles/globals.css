@@ -50,10 +50,10 @@ a {
 }
 @keyframes arrowDownBounce {
   from {
-    transform: translateY(5px);
+    transform: translateY(3px);
   }
   to {
-    transform: translateY(15px);
+    transform: translateY(8px);
   }
 }
 

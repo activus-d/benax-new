@@ -124,4 +124,24 @@ export const studioPhotos = [
         id: 15,
         src: "/assets/image19.jpg"
     },
+
+];
+
+export const topSectionImages = [
+    {
+        id: 1,
+        src: "/assets/image12.jpg"
+    },
+    {
+        id: 2,
+        src: "/assets/image13.jpg"
+    },
+    {
+        id: 4,
+        src: "/assets/image15.jpg"
+    },
+    {
+        id: 5,
+        src: "/assets/image17.jpg"
+    }
 ]

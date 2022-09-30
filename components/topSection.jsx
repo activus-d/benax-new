@@ -1,81 +1,81 @@
-import React, {useRef, useEffect, useState, Children} from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-import {BsArrowDown} from 'react-icons/bs';
+import { useGlobalContext } from './globalContext';
+import { topSectionImages } from './data'
 
 export default function TopSection() {
-    const [slideIndex, setSlideIndex] = useState(0);
-    const mySlides = useRef(null);
-    const myDots = useRef(null);
-    
+    const { useFetchData } = useGlobalContext()
+    const [bags, cloths] = useFetchData()
+    const [sales, setSales] = useState([])
+    const [randomDisplay, setRandomDisplay] = useState('')
+    const [windowWidth, setWindowWidth] = useState(0)
+
     useEffect(() => {
-        const interval = setInterval(() => {
-            const slides = Array.from(mySlides.current.children)
-            const dots = Array.from(myDots.current.children)
-            slides.forEach(element => element.style.display = "none")
-            dots.forEach(element=> element.classList.remove('active'))
-            setSlideIndex((prevValue) => {
-                return prevValue + 1
-            })
-            
-            if (slideIndex === slides.length) {setSlideIndex(1)}
-            if(slideIndex !== 0) {
-                const displaySlideArr = slides.filter((element, index) => index == slideIndex - 1)
-                const [displaySlide] = displaySlideArr
-                displaySlide.style.display = "block"
-                const pointerDotArr = dots.filter((element, index) => index == slideIndex - 1)
-                const [pointerDot] = pointerDotArr
-                pointerDot.classList.add('active')
+        setSales([...(bags.data || []), ...(cloths.data || [])])
+    }, [bags, cloths])
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth)
+        console.log(windowWidth)
+    })
+
+    useEffect(() => {
+        if(windowWidth <= 500) {
+            const interval = setInterval(() => {
+            const indexToDisplay = Math.round((Math.random() / 1) * sales.length - 1)
+            const product = sales[indexToDisplay]
+            setRandomDisplay()
+            if(product) {
+                const {attributes} = product
+                const {product_image} = attributes;
+                const {data} = product_image
+                const {formats} = data.attributes
+                const {small} = formats
+                setRandomDisplay(small.url)
             }
-        }, 2500)
-        return () => {
-            clearInterval(interval)
+            }, 2000)
+            return () => {
+                clearInterval(interval)
+            }
+        }else {
+            const interval = setInterval(() => {
+            const indexToDisplay = Math.round((Math.random() / 1) * topSectionImages.length - 1)
+            const itemToDisplay = topSectionImages[indexToDisplay]
+            if(itemToDisplay) {
+                setRandomDisplay(itemToDisplay.src)
+            }
+            }, 2000)
+            return () => {
+                clearInterval(interval)
+            }
         }
-    }, [mySlides, slideIndex] );
-    
+    })
 
     return (
-        <section className="relative flex justify-center bg-100% mt-[-10px] text-veryDeepBlue h-[500px] md:h-[500px]">
-            <div className="relative w-screen" ref={mySlides}>
-                <div className="top-0 w-full h-[500px] md:h-[500px] fade">
-                    <img 
-                        src="assets/image12.jpg"
-                        className="w-full h-full"
-                    />
+        <section className='bg-veryLightGrey relative h-[500px] flex flex-col items-center'>
+            <section className='flex flex-col items-center w-[200px] absolute top-[45%] opacity-80 extraSm:w-auto'>
+                <div className='bg-deepBlue text-white px-5 py-3'>
+                    <span className='text-[12px] extraSm:text-[16px]'>SPRING/SUMMER 2022</span>
+                    <h1 className='text-xl opacity-1 extraSm:text-4xl'>
+                        <span className='text-red-500 font-bold'>Sale 30%</span>
+                        <br />
+                        <span>Off Everything</span>
+                    </h1>
                 </div>
-                <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">
-                    <img 
-                        src="assets/image13.jpg"
-                        className="w-full h-full"
-                    />
-                </div>
-                <div className="hidden top-0 w-full h-[500px] md:h-[500px] fade">
-                    <img 
-                        src="assets/image14.jpg"
-                        className="w-full h-full"
-                    />
-                </div>
-            </div>
-            <div className='slideDots absolute bottom-5 flex' ref={myDots}>
-                <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div> 
-                <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div> 
-                <div className="dot h-7 w-7 mr-2 rounded-full bg-lightGrey transition ease-in duration-[600ms]"></div>
-            </div>
-           <div className='absolute top-[150px]'>
-             <h1 className='text-2xl mb-5 font-bold md:text-5xl sm:text-4xl'>
-                STUDIO COLLECTION
-            </h1>
-            <div className='flex flex-col items-center'>
-                <h2 className='pr-10 text-xl font-bold sm:text-2xl'>
-                    SHOP NOW
-                </h2>
-                <Link href='#categories'>
-                    <a>
-                        <BsArrowDown className='text-6xl mt-7 arrowDown'/>
-                    </a>
-                </Link>
-            </div>
-           </div>
+                <button className='bg-red-500 text-white mt-3 w-24 py-2 arrowDown'>
+                    <Link href='#categories'>
+                        SHOP NOW
+                    </Link>
+                </button>
+            </section>
+            <section className='w-full'>
+                <img 
+                    src={randomDisplay}
+                    alt="discounted product images"
+                    className='h-[500px] w-full'
+                />
+            </section>
         </section>
     )
 }
