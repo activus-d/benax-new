@@ -8,7 +8,7 @@ export default function TopSection() {
     const { useFetchData } = useGlobalContext()
     const [bags, cloths] = useFetchData()
     const [sales, setSales] = useState([])
-    const [randomDisplay, setRandomDisplay] = useState('')
+    const [randomDisplay, setRandomDisplay] = useState(topSectionImages[1].src)
     const [windowWidth, setWindowWidth] = useState(0)
 
     useEffect(() => {
