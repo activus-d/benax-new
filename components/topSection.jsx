@@ -25,7 +25,6 @@ export default function TopSection() {
             const interval = setInterval(() => {
             const indexToDisplay = Math.round((Math.random() / 1) * sales.length - 1)
             const product = sales[indexToDisplay]
-            setRandomDisplay()
             if(product) {
                 const {attributes} = product
                 const {product_image} = attributes;
