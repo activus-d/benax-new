@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 
 const GlobalContext = React.createContext();
 
@@ -10,6 +10,39 @@ const GlobalProvider = ({ children }) => {
     const [cartItemsNo, setCartItemsNo] = useState(0);
     const [cartBagItems, setBagCartItems] = useState([]);
     const [cartClothItems, setClothCartItems] = useState([]);
+
+    const useFetchData = () => {
+      const [bags, setBags] = useState([]);
+      const [cloths, setCloths] = useState([]);
+
+      const fetchBags = useCallback(async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/bags?populate=*`)
+          const data = await response.json()
+          setBags(data)
+        } catch (err) {
+          console.log(err)
+        }
+      }, []);
+
+      const fetchCloths = useCallback(async () => {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/cloths?populate=*`)
+          const data = await response.json()
+          setCloths(data)
+        } catch (err) {
+          console.log(err)
+        } 
+      }, []);
+
+      useEffect(() => {
+        fetchBags()
+        fetchCloths()
+      }, [fetchBags, fetchCloths]);
+
+      return [bags, cloths];
+    }
+    
 
     useEffect(() => {
       if(localStorage.getItem('storedCartNo') !== null) {
@@ -73,6 +106,7 @@ const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
+        useFetchData,
         cartItemsNo,
         addCartItem,
         removeCartItem,
