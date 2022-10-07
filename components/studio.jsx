@@ -12,7 +12,6 @@ export default function Studio({title}) {
 
     const handlePrev = () => {
         const id = mySlides.current.dataset.id
-        console.log(id + 'p')
         if(id != 1) {
             const photoToDislay = studioPhotos.filter((photo) => photo.id === +id - 1)
             setPhotos(photoToDislay)
@@ -25,17 +24,14 @@ export default function Studio({title}) {
 
     const handleNext = ({title}) => {
         const id = mySlides.current.dataset.id
-        console.log(id + 'n')
         if(id <= studioPhotos.length) {
             if(id == studioPhotos.length - 1) {
                 const photoToDislay = studioPhotos.filter((photo) => photo.id === +id + 1)
-                console.log(photoToDislay, typeof id, 'n4')
                 setPhotos(photoToDislay)
                 setIsNext(false)
                 setIsPrev(true)                
             }else if(id < studioPhotos.length) {
                 const photoToDislay = studioPhotos.filter((photo) => photo.id === +id + 1)
-                console.log(photoToDislay, typeof id, 'n0-3', isNext)
                 setPhotos(photoToDislay)
                 id !== studioPhotos.length ? setIsNext(true) : setIsNext(false)
                 id !== 0 && setIsPrev(true)

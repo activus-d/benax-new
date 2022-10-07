@@ -7,10 +7,10 @@ import Router from 'next/router';
 
 export default function Login() {
     const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''});
-    const [isResponseData, setIsResponsedata] = useState(false);
+    const [setIsResponsedata] = useState(false);
     const [isUserInvalid, setIsUserInvalid] = useState(false);
-    const { isUserLoggedinToTrue, setCurrentUser } = useAuthContext();
-    const [passwordMessage, setPasswordMessage] = useState("password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters");
+    const { isUserLoggedinToTrue } = useAuthContext();
+    const [passwordMessage] = useState("password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters");
     const [passwordType, setPasswordType] = useState("password");
     
 
@@ -37,7 +37,6 @@ export default function Login() {
         } else {
             setUserDetails({identifier: '', email: '', password: ''})
             setIsUserInvalid(true)
-            console.log(responseData)
         }
     };
 
@@ -67,16 +66,6 @@ export default function Login() {
                         onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
                         placeholder='Enter your name'
                     />
-                    {/* <input 
-                        className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-    [480px]'
-                        name='email'
-                        type='email'
-                        required
-                        autoComplete="off"
-                        value={userDetails.email}
-                        onChange={(e) => setUserDetails({...userDetails, [e.target.name]: e.    target.value})}
-                        placeholder='Enter your email'
-                    /> */}
                     <input 
                         className='outline-none border-2 w-full py-1 px-2 mb-4 sm:w-86 md:w-[480px]'
                         name='password'

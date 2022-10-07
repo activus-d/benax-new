@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import Router from 'next/router';
 
 import { useAuthContext } from '../lib/authContext';
-import { fetcher } from '../lib/api';
 import { setToken } from '../lib/auth';
 import Link from 'next/link';
 
@@ -35,7 +34,6 @@ export default function Register() {
 
     const hideInstruction = () => {
         if(window.innerWidth <= 600) {
-            console.log('b')
             message.current.style.display = "block";
         }else {
             message.current.style.display = "none";
@@ -110,14 +108,12 @@ export default function Register() {
                         setIsUserInvalid(true)
                     }else {
                         setToken(response);
-                        console.log(response)
                         setIsUserInvalid(false)
                         isUserLoggedinToTrue()
                         Router.push('/')
                     }
                 })
                 .catch(err => {
-                    console.log(err)
                     setIsUserInvalid(false)
                 })
         }

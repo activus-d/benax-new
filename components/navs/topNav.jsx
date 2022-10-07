@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import Link from 'next/link';
 import { BsCart } from 'react-icons/bs';
 
@@ -57,25 +56,7 @@ export default function TopNav() {
                     </Link>
                 </div>
                 <ul className='flex justify-center justify-self-end'>
-                    {
-                        /**
-                         * Future Update
-                         * Studio
-                         */
-                    }
-                    {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>STUDIO</li> */}
                     <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>ABOUT</li>
-                    {
-                        /**
-                         * Future Update
-                         * search functionality
-                         */
-                    }
-                    {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
-                        <button>
-                            <BsSearch />
-                        </button>
-                    </li> */}
                     <li className=' relative mr-7'>
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>
@@ -127,25 +108,7 @@ export default function TopNav() {
                     </Link>
                 </div>
                 <ul className='flex justify-center justify-self-end'>
-                    {
-                        /**
-                         * Future Update
-                         * Studio
-                         */
-                    }
-                    {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>STUDIO</li> */}
                     <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer flex items-center'>ABOUT</li>
-                    {
-                        /**
-                         * Future Update
-                         * search functionality
-                         */
-                    }
-                    {/* <li className='mr-7 hover:border-b-2 hover:border-b-veryDeepBlue hover:font-bold cursor-pointer'>
-                        <button>
-                            <BsSearch />
-                        </button>
-                    </li> */}
                     <li className=' relative mr-7'>
                         <Link href='/cart'>
                             <a className='flex justify-center items-center'>

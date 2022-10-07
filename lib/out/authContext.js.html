@@ -136,7 +136,6 @@ const AuthProvider = ({ children }) => {
     const checkUserLoggedIn = async () => {
       const m = new Magic(MAGIC_PUBLIC_KEY)
        const response = await m.user.isLoggedIn()
-       console.log(response)
        return response
     }
 
