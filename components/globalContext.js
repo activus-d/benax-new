@@ -21,7 +21,7 @@ const GlobalProvider = ({ children }) => {
           const data = await response.json()
           setBags(data)
         } catch (err) {
-          console.log(err)
+          
         }
       }, []);
 
@@ -31,7 +31,7 @@ const GlobalProvider = ({ children }) => {
           const data = await response.json()
           setCloths(data)
         } catch (err) {
-          console.log(err)
+          
         } 
       }, []);
 

@@ -12,9 +12,6 @@ import getStripe from '../lib/stripe';
 
 
 const Cart = ({bagsData, clothsData}) => {
-    let storedBags;
-    let storedCloths;
-    let storedNo;
     
     useEffect(() => {
         if(localStorage.getItem('storedBagDataCart') !== null) {
@@ -100,7 +97,6 @@ const Cart = ({bagsData, clothsData}) => {
                 }else {
                     const {attributes} = item;
                     oldPrice = (attributes.payout_product_price).toFixed(2);
-                    console.log(Number(oldPrice) - Number(product_price) + ' deduct')
                     return {
                         ...item,
                         attributes: {
@@ -128,7 +124,6 @@ const Cart = ({bagsData, clothsData}) => {
     };
     
     const handleBuy = async ()=>{
-        console.log('a')
         const stripe = await getStripe()
         const res = await fetch('/api/stripe', {
             method: 'POST',

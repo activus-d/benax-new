@@ -134,14 +134,10 @@ export const topSectionImages = [
     },
     {
         id: 2,
-        src: "/assets/image13.jpg"
-    },
-    {
-        id: 4,
         src: "/assets/image15.jpg"
     },
     {
-        id: 5,
+        id: 3,
         src: "/assets/image17.jpg"
     }
 ]

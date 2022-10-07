@@ -5,11 +5,11 @@ import { useGlobalContext } from './globalContext';
 import { topSectionImages } from './data'
 
 export default function TopSection() {
+    const [sales, setSales] = useState([])
+    const [randomDisplay, setRandomDisplay] = useState(topSectionImages[0].src)
+    const [windowWidth, setWindowWidth] = useState(0)
     const { useFetchData } = useGlobalContext()
     const [bags, cloths] = useFetchData()
-    const [sales, setSales] = useState([])
-    const [randomDisplay, setRandomDisplay] = useState(topSectionImages[1].src)
-    const [windowWidth, setWindowWidth] = useState(0)
 
     useEffect(() => {
         setSales([...(bags.data || []), ...(cloths.data || [])])
@@ -17,7 +17,6 @@ export default function TopSection() {
 
     useEffect(() => {
         setWindowWidth(window.innerWidth)
-        console.log(windowWidth)
     })
 
     useEffect(() => {
@@ -25,7 +24,6 @@ export default function TopSection() {
             const interval = setInterval(() => {
             const indexToDisplay = Math.round((Math.random() / 1) * sales.length - 1)
             const product = sales[indexToDisplay]
-            setRandomDisplay()
             if(product) {
                 const {attributes} = product
                 const {product_image} = attributes;
@@ -63,11 +61,13 @@ export default function TopSection() {
                         <span>Off Everything</span>
                     </h1>
                 </div>
-                <button className='bg-red-500 text-white mt-3 w-24 py-2 arrowDown'>
-                    <Link href='#categories'>
-                        SHOP NOW
-                    </Link>
-                </button>
+                <Link href='#categories'>
+                    <a>
+                        <button className='bg-red-500 text-white mt-3 w-24 py-2 arrowDown'>
+                            SHOP NOW
+                        </button>
+                    </a>
+                </Link>
             </section>
             <section className='w-full'>
                 <img 
