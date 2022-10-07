@@ -12,6 +12,9 @@ import getStripe from '../lib/stripe';
 
 
 const Cart = ({bagsData, clothsData}) => {
+    let storedBags;
+    let storedCloths;
+    let storedNo;
     
     useEffect(() => {
         if(localStorage.getItem('storedBagDataCart') !== null) {
@@ -25,7 +28,7 @@ const Cart = ({bagsData, clothsData}) => {
         };
     }, [])
 
-    const { cartBagItems, cartClothItems, removeCartItem } = useGlobalContext();
+    const { cartBagItems, cartClothItems, removeCartItem, deductCartItemNo, addCartItemNo } = useGlobalContext();
     const { isUserLoggedin } = useAuthContext();
     const [items, setItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
@@ -83,6 +86,7 @@ const Cart = ({bagsData, clothsData}) => {
             };
         });
         setItems(newItems);
+        addCartItemNo(1);
         toast.success(
             `${+quantity + 1} ${product_name} in cart`
         );        
@@ -108,16 +112,18 @@ const Cart = ({bagsData, clothsData}) => {
                 };
             });
             setItems(newItems);
+            deductCartItemNo(1);
             toast.success(
                 `1 ${product_name} removed to cart`
             );
         }
     };
 
-    const removeItem = (product_name, category, id, slug) => {
+    const removeItem = (product_name, category, id, slug, quantity) => {
         const newItems = items.filter(item => item.attributes.slug !== slug);
         setItems(newItems);
-        removeCartItem(category, id, slug)
+        removeCartItem(category, id, slug, quantity);
+        deductCartItemNo(+quantity)
         toast.info(
             `all ${product_name} item(s) removed from cart`
         );
@@ -167,14 +173,14 @@ const Cart = ({bagsData, clothsData}) => {
                                 <h3>{product_name}</h3>
                                 <div className='flex w-32 h-7 bg-white grid grid-cols-3'>
                                     <button 
-                                        onClick={() => deductQuantity(product_name, slug, quantity,     product_price, category)}
+                                        onClick={() => deductQuantity(product_name, slug, quantity, product_price, category)}
                                         className='text-white bg-deepBlue flex justify-center   items-center text-2xl'
                                     >
                                         <AiOutlineMinus />
                                     </button>
                                     <p className='text-center font-bold'>{quantity}</p>
                                     <button 
-                                        onClick={() => addQuantity(product_name, slug, quantity,    product_price, category)}
+                                        onClick={() => addQuantity(product_name, slug, quantity, product_price, category)}
                                         className='text-white bg-deepBlue flex justify-center   items-center text-2xl'
                                     >
                                         <AiOutlinePlus />
@@ -182,7 +188,7 @@ const Cart = ({bagsData, clothsData}) => {
                                 </div>
                                 <h3>{`$${product_price}`}</h3>
                                 <button
-                                    onClick={() => removeItem(product_name, category, id, slug)}
+                                    onClick={() => removeItem(product_name, category, id, slug, quantity)}
                                     className='w-32 h-7 bg-deepBlue text-white'
                                 >
                                     REMOVE

@@ -56,11 +56,14 @@ const GlobalProvider = ({ children }) => {
       };
     }, []);
     
-    const addCartItem = () => {
-        setCartItemsNo(cartItemsNo + 1)
+    const addCartItemNo = (quantity) => {
+        setCartItemsNo(cartItemsNo + quantity)
+    };
+    const deductCartItemNo = (quantity) => {
+        setCartItemsNo(cartItemsNo - quantity)
     };
 
-    const removeCartItem = (category, id, slug) => {
+    const removeCartItem = (category, id, slug, quantity) => {
       let newBagItems;
       let newClothItems;
       if(category === 'bag') {
@@ -75,8 +78,9 @@ const GlobalProvider = ({ children }) => {
         clothData = newClothItems
         localStorage.setItem('storedClothDataCart', JSON.stringify(clothData))
       }
-      setCartItemsNo(cartItemsNo - 1)
-      storedCartItemsNo = cartItemsNo - 1
+      const priorCartItemsNum = storedCartItemsNo
+      setCartItemsNo(cartItemsNo - Number(quantity))
+      storedCartItemsNo = priorCartItemsNum - 1
       localStorage.setItem('storedCartNo', storedCartItemsNo)
     };
     
@@ -108,7 +112,8 @@ const GlobalProvider = ({ children }) => {
       value={{
         useFetchData,
         cartItemsNo,
-        addCartItem,
+        addCartItemNo,
+        deductCartItemNo,
         removeCartItem,
         addToCart,
         cartBagItems,

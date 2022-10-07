@@ -22,7 +22,7 @@ export default function Studio({title}) {
         }
     };
 
-    const handleNext = ({title}) => {
+    const handleNext = () => {
         const id = mySlides.current.dataset.id
         if(id <= studioPhotos.length) {
             if(id == studioPhotos.length - 1) {
