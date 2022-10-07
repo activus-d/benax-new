@@ -1,7 +1,6 @@
 import Categories from './categories';
 import TopSection from './topSection';
 import NewProduct from './newProducts';
-import TwoItemsSection from './benaxCollection';
 import Studio from './studio';
 import BookAppointment from './bookAppointment';
 import BenaxCollection from './benaxCollection';

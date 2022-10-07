@@ -7,10 +7,9 @@ import Router from 'next/router';
 
 export default function Login() {
     const [userDetails, setUserDetails] = useState({identifier: '', email: '', password: ''});
-    const [setIsResponsedata] = useState(false);
     const [isUserInvalid, setIsUserInvalid] = useState(false);
     const { isUserLoggedinToTrue } = useAuthContext();
-    const [passwordMessage] = useState("password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters");
+    const [passwordMessage, setPasswordMessage] = useState("password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters");
     const [passwordType, setPasswordType] = useState("password");
     
 
@@ -32,7 +31,6 @@ export default function Login() {
         if(responseData.user) {
             setToken(responseData)
             isUserLoggedinToTrue()
-            setIsResponsedata(true)
             Router.push('/')
         } else {
             setUserDetails({identifier: '', email: '', password: ''})
